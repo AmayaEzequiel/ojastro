@@ -1,0 +1,228 @@
+---
+interface Model {
+  id: string;
+  name: string;
+  specs: string[];
+  image: string;
+}
+
+interface Props {
+  models: Model[];
+  sectionTitle?: string;
+  theme?: 'dark' | 'light'; // Nuevo Prop para el tema
+}
+
+const { 
+  models = [], 
+  sectionTitle = "Nuestros Modelos",
+  theme = 'light' // Por defecto será oscuro
+} = Astro.props;
+
+// Definimos los colores de marca que no cambian
+const brandAccent = "#0978D3"; 
+---
+
+<section id="modelos" class={`models-section theme-${theme}`}>
+  <div class="glow-effect"></div>
+  
+  <div class="container">
+    <h2 class="main-title">{sectionTitle}</h2>
+
+    <div class="tabs-container">
+      <button class="nav-btn prev" id="prevBtn" aria-label="Anterior">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"></path></svg>
+      </button>
+
+      <div class="tabs-list">
+        {models.map((model, index) => (
+          <button class={`tab-item ${index === 0 ? 'active' : ''}`} data-index={index}>
+            {model.id}
+            <span class="active-indicator"></span>
+          </button>
+        ))}
+      </div>
+
+      <button class="nav-btn next" id="nextBtn" aria-label="Siguiente">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"></path></svg>
+      </button>
+    </div>
+
+    <div class="model-display">
+      {models.map((model, index) => (
+        <div class={`model-content ${index === 0 ? 'active' : ''}`} data-content-index={index}>
+          <div class="model-info">
+            <h3 class="model-name">{model.name}</h3>
+            <ul class="specs-list">
+              {model.specs.map(spec => (
+                <li><span class="dot"></span> {spec}</li>
+              ))}
+            </ul>
+            <div class="actions">
+              <button class="btn-primary">Cotízalo Ahora</button>
+              <button class="btn-outline">Explorar</button>
+            </div>
+          </div>
+          <div class="model-visual">
+            <img src={model.image} alt={model.name} class="car-img" />
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style define:vars={{ brandAccent }}>
+  /* 1. VARIABLES DE TEMA (El corazón del cambio) */
+  .models-section.theme-dark {
+    --bg-color: #0a0a0a;
+    --text-main: #ffffff;
+    --text-muted: #aaaaaa;
+    --tab-inactive: #555555;
+    --nav-bg: #1a1a1a;
+    --nav-border: #333333;
+    --glow-opacity: 0.1;
+  }
+
+  .models-section.theme-light {
+    --bg-color: #f8f9fa;
+    --text-main: #111827;
+    --text-muted: #4b5563;
+    --tab-inactive: #9ca3af;
+    --nav-bg: #ffffff;
+    --nav-border: #e5e7eb;
+    --glow-opacity: 0.05;
+  }
+
+  /* 2. ESTILOS USANDO LAS VARIABLES */
+  .models-section {
+    position: relative;
+    padding: 5rem 1.5rem;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    overflow: hidden;
+    transition: background-color 0.4s ease, color 0.4s ease;
+    font-family: system-ui, sans-serif;
+  }
+
+  .glow-effect {
+    position: absolute;
+    left: 25%; top: 30%;
+    width: 40vw; height: 40vw;
+    background: var(--brandAccent);
+    opacity: var(--glow-opacity);
+    filter: blur(100px);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+
+
+
+  .container { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; }
+  .main-title { text-align: center; font-size: 3rem; font-weight: 900; margin-bottom: 3rem;}
+
+  .tabs-container { display: flex; justify-content: center; align-items: center; gap: 1rem; margin-bottom: 4rem; }
+  .tabs-list { display: flex; gap: 0.5rem; border-bottom: 1px solid var(--nav-border); }
+
+  .tab-item {
+    background: none; border: none; 
+    color: var(--tab-inactive);
+    padding: 0.75rem 1.5rem; font-weight: 700;
+    cursor: pointer; position: relative; transition: color 0.3s;
+  }
+
+  .tab-item.active { color: var(--text-main); }
+  .active-indicator {
+    position: absolute; bottom: -1px; left: 0; width: 100%;
+    height: 2px; background: var(--brandAccent);
+    transform: scaleX(0); transition: transform 0.3s;
+  }
+  .tab-item.active .active-indicator { transform: scaleX(1); }
+
+  .nav-btn {
+    background: var(--nav-bg); 
+    border: 1px solid var(--nav-border); 
+    color: var(--text-main);
+    width: 45px; height: 45px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; transition: all 0.2s;
+  }
+
+  .model-content { display: none; grid-template-columns: 1fr; align-items: center; gap: 1rem; }
+  .model-content.active { display: grid; animation: slideIn 0.5s ease forwards; }
+
+  @media (min-width: 768px) {
+    .model-content { grid-template-columns: 3fr 5fr; }
+  }
+
+  .model-name { font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 900; margin: 0; }
+  .specs-list { list-style: none; padding: 0; margin: 2.5rem 0; }
+  .specs-list li { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1rem; color: var(--text-muted); }
+  .dot { width: 8px; height: 8px; background: var(--brandAccent); border-radius: 50%; }
+
+  .btn-primary { background: var(--brandAccent); color: #000; border: none; padding: 1rem 2rem; border-radius: 50px; font-weight: 700; cursor: pointer; }
+  .btn-outline { background: transparent; border: 2px solid var(--brandAccent); color: var(--brandAccent); padding: 1rem 2rem; border-radius: 50px; font-weight: 700; cursor: pointer; }
+
+
+
+
+  .car-img { width: 100%; filter: drop-shadow(0 20px 40px rgba(0,0,0,0.2)); }
+
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateX(15px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+</style>
+
+<script>
+  function initSelector() {
+    const tabs = document.querySelectorAll('.tab-item');
+    const contents = document.querySelectorAll('.model-content');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const visibleItems = 4;
+    
+    let currentIndex = 0;
+    const totalModels = tabs.length;
+    if (totalModels === 0) return;
+
+    function updateUI(index) {
+      if (index >= totalModels) index = 0;
+      if (index < 0) index = totalModels - 1;
+      currentIndex = index;
+
+      tabs.forEach((tab, i) => tab.classList.toggle('active', i === currentIndex));
+      contents.forEach((content, i) => content.classList.toggle('active', i === currentIndex));
+
+      // Calcular el rango de elementos visibles
+      const halfVisible = Math.floor(visibleItems / 2);
+      let start = Math.max(0, index - halfVisible);
+      let end = Math.min(totalModels - 1, start + visibleItems - 1);
+
+      if (end === totalModels - 1) {
+          start = Math.max(0, end - visibleItems + 1);
+      }
+
+      tabs.forEach((num, i) => {
+          num.style.display = (i >= start && i <= end) ? "flex" : "none";
+          num.classList.toggle("on", i === index);
+      });
+    }
+
+    // --- EVENTOS ---
+    nextBtn?.addEventListener('click', () => updateUI(currentIndex + 1));
+    prevBtn?.addEventListener('click', () => updateUI(currentIndex - 1));
+    tabs.forEach((tab) => {
+      tab.addEventListener('click', () => {
+        updateUI(parseInt(tab.getAttribute('data-index') || '0'));
+      });
+    });
+
+    // ¡ESTA ES LA CLAVE! 
+    // Ejecutamos la función una vez al cargar para aplicar el filtro de 3 elementos inmediatamente.
+    updateUI(0); 
+  }
+
+  initSelector();
+  document.addEventListener('astro:after-swap', initSelector);
+</script>

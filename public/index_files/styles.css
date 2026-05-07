@@ -1,0 +1,280 @@
+  
+            .stats__title {
+                font-size: 58px;
+            }
+
+            .model__tech .title-text {
+                background-color: #f4f5f5;
+            }
+
+            .character-slider__content {
+                top: 160px;
+            }
+
+            .character-slider__pagination {
+                /* bottom: 200px; */
+                bottom: 60px;
+            }
+
+            .jc_cambio_color_blan,
+            .jc_cambio_color_blan3 {
+                background-color: #fff !important;
+            }
+
+            .jc_more_padding {
+                padding-top: 40px;
+            }
+
+            .jc_txt1_cambio {
+                color: #30363a !important;
+                font-weight: 400 !important;
+            }
+
+            .jc_txt2_cambio {
+                padding-top: 20px !important;
+                color: #33393d !important;
+                font-weight: 500 !important;
+            }
+
+            .jc_cambio_color_blan4,
+            .jc_cambio_color_blan5,
+            .jc_txt_blan6 {
+                color: #fff !important;
+            }
+
+            .character-slider__pagination2 {
+                color: #fff !important;
+                height: 2px;
+            }
+
+            .jc_cambio_col_dark {
+                background-color: #31363a !important;
+            }
+
+            .jc_tab_numbers {
+                display: flex;
+                justify-content: center;
+                padding-bottom: 0px;
+                flex-wrap: wrap;
+            }
+
+            .jc_cta_tab {
+                font-size: 18px;
+                line-height: 50px;
+                color: #6f8590;
+                font-weight: 500;
+
+                padding-left: 20px;
+                padding-right: 20px;
+                padding-bottom: 10px;
+                text-decoration: none;
+                cursor: pointer;
+                border: none;
+                background-color: transparent;
+                transition: .2s;
+            }
+
+            .tab_activo_jc {
+                text-transform: uppercase;
+                color: #30363a;
+                text-decoration: underline;
+            }
+
+            .slider_button_active {
+                color: #30363a;
+                text-decoration: underline;
+            }
+
+            .full-bg__img img {
+                object-fit: contain !important;
+            }
+
+            .btn1_jc {
+                display: inline-block;
+                font-size: 14px;
+                line-height: 27px;
+                color: #30363a;
+                font-weight: 500;
+                font-family: "Avenir";
+                text-align: center;
+                border: 1px solid #30363a;
+                padding: 15px 30px 15px 30px;
+                margin-top: 20px;
+                text-decoration: none;
+            }
+
+            .container {
+                max-width: 1140px;
+                margin-left: auto;
+                margin-right: auto;
+                padding-left: 15px;
+                padding-right: 15px;
+            }
+
+            .c-iframe-colores {
+                width: 100%;
+                height: 100%;
+                position: relative;
+                overflow: hidden;
+                aspect-ratio: 16/9;
+            }
+
+            .c-iframe-colores iframe {
+                width: 100%;
+                height: 100%;
+                border: none;
+                position: absolute;
+                top: 0;
+                left: 0;
+            }
+
+            .datos_banner {
+                right: auto;
+                left: 120px;
+                align-items: start;
+                bottom: 69px;
+            }
+
+            .logo_banner {
+                width: 150px;
+            }
+
+            .dos_columnas_banner {
+                display: flex;
+                align-items: center;
+            }
+
+            .col_1_pr_mt {
+                padding-right: 50px;
+            }
+
+            .col_2_pr_mt {
+                padding-left: 30px;
+            }
+
+            .txt_precio_desde {
+                font-size: 12px;
+                font-family: Avenir, sans-serif;
+            }
+
+            .precio_desde {
+                font-size: 48px;
+                line-height: 58px;
+                font-weight: bold;
+                font-family: Avenir, sans-serif;
+            }
+
+            .txt_combustible {
+                font-size: 22px;
+                line-height: 25px;
+                letter-spacing: 1px;
+                font-weight: bold;
+                font-family: Avenir, sans-serif;
+            }
+
+            .txt_motor {
+                font-size: 20px;
+                line-height: 20px;
+                letter-spacing: 1px;
+                font-family: Avenir, sans-serif;
+            }
+
+            @media (max-width: 1199px) {
+
+                .character-slider__content {
+                    top: 0px !important;
+                }
+
+                .character-slider__pagination {
+                    position: initial !important;
+                    bottom: 0px !important;
+                }
+            }
+
+            @media (min-width: 1199px) {
+                .character-slider__content_control {
+                    top: 255px;
+                }
+
+                .character-slider__pagination3 {
+                    bottom: 110px;
+                }
+            }
+
+            @media (max-width: 767px) {
+                .centro_header_vehiculos a {
+                    max-width: 50%;
+                    float: left;
+                    width: 100%;
+                }
+
+                .centro_header_vehiculos a img {
+                    margin-left: auto;
+                    margin-right: auto;
+                }
+
+                .container {
+                    padding-left: 0;
+                    padding-right: 0;
+                }
+            }
+
+
+            @media (max-width: 767px) {
+                .character-slider__pagination2 {
+                    color: #fff !important;
+                }
+            }
+
+            .model__tech,
+            .model__tech .title-text,
+            .model__features,
+            .model__features--white .title-text,
+            .model__features .feature-block,
+            .brand-page .content,
+            .brand-page {
+                background-color: #f4f5f5;
+            }
+
+            @media (max-width: 579px) {
+                .jc_cta_tab {
+                    padding: 0px 8px 0px 8px;
+                    font-size: 14px;
+                }
+            }
+
+            @media (max-width: 380px) {
+                /*.jc_cta_tab{*/
+                /*    padding: 0px 2px 0px 2px;*/
+                /*    font-size: 12px;*/
+                /*}*/
+            }
+       
+                                    @media (min-width: 1200px) {
+                                        .slide-color-245 {
+                                            color: #ffffff;
+                                        }
+                                    }
+                                
+                                    @media (min-width: 1200px) {
+                                        .slide-color-246 {
+                                            color: #ffffff;
+                                        }
+                                    }
+                                
+                                    @media (min-width: 1200px) {
+                                        .slide-color-245 {
+                                            color: #ffffff;
+                                        }
+                                    }
+                                
+                                    @media (min-width: 1200px) {
+                                        .slide-color-246 {
+                                            color: #ffffff;
+                                        }
+                                    }
+                                
+                .model__tech .character-slider-container {
+                    margin-bottom: 4px;
+                }
+           

@@ -1,0 +1,126 @@
+/*COTIZACIONES FORM*/
+.swal-footer{
+    text-align: center!important;
+}
+.swal-button-container button {
+    background-color: #000000;
+}
+.swal-button-container button:hover {
+    background-color: #fff!important;
+    color: #000000!important;
+}
+.sel_vehiculo {
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+    font-family: Raleway Bold, sans-serif;
+    background-color: #f3f4f9;
+    border: 1px solid #f3f4f9;
+    border-radius: 8px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    display: block;
+
+
+}
+
+.gracias-cot {
+    text-align: center;
+    padding-top: 50px;
+}
+
+.cotizaciones {
+    display: none;
+}
+.aviso_privacidad h1 {
+    text-align: center;
+    padding-bottom: 20px;
+}
+.aviso_privacidad p{
+    padding: 0 0 25px 0;
+}
+.aviso_privacidad h3 {
+    padding-bottom: 15px;
+}
+.aviso_privacidad ol{
+    padding:0 0 15px 25px
+}
+.aviso_privacidad ol li {
+    padding-bottom: 5px;
+}
+.aviso_privacidad ol li::marker {
+    font-weight: bold;
+}
+
+.container {
+    max-width: 1100px;
+    padding-right: 20px;
+    padding-left: 20px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.modelos {
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+
+.modelos-header {
+    margin-bottom: 40px;
+}
+
+.modelos-header__title {
+    letter-spacing: normal;
+    font-family: Avenir,sans-serif;
+    font-size: 32px;
+    font-weight: 300;
+    line-height: 1.2;
+    text-align: center;
+}
+
+.modelos-items {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.modelos-items-item {
+    width: 23%;
+    margin-left: 1%;
+    margin-right: 1%;
+    margin-bottom: 2%;
+    text-decoration: none;
+    color: #30363a;
+    text-align: center;
+}
+
+.modelos-items-item__title {
+    font-weight: 500;
+    font-family: Avenir, sans-serif;
+}
+
+@media screen and (max-width: 991px) {
+    .modelos-items-item {
+        width: 31%;
+    }
+    .stats__title {
+        font-size: 40px !important;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .modelos-items-item {
+        width: 48%;
+    }
+}
+
+@media screen and (max-width: 479px) {
+    .modelos-items-item {
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+    .stats__title {
+        font-size: 25px !important;
+    }
+}

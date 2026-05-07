@@ -1,0 +1,208 @@
+---
+interface Props {
+  bgImage?: string;
+  tagline?: string;
+  titlePart1?: string;
+  titleHighlight?: string;
+  warrantyYears?: string | number;
+  warrantyDistance?: string;
+  partnerName?: string;
+  // Colores por defecto (puedes pasarlos como props o usar variables globales)
+  brandColor?: string; 
+  inkColor?: string;
+}
+
+const {
+  bgImage = "/warranty-bg-D-hCm7Pi.jpg",
+  tagline = "Respaldo Total",
+  titlePart1 = "Una garantía como",
+  titleHighlight = "la imaginaste.",
+  warrantyYears = "7",
+  warrantyDistance = "200,000 km",
+  partnerName = "Grupo Silaba",
+  brandColor = "#eab308", // Ajusta a tu color de marca
+  inkColor = "#111827"    // Ajusta a tu color oscuro
+} = Astro.props;
+---
+
+<section class="hero-warranty">
+  <img src={bgImage} alt="" aria-hidden="true" class="bg-image" />
+  
+  <div class="overlay-radial"></div>
+
+  <div class="container">
+    <p class="tagline">{tagline}</p>
+    
+    <h1 class="title">
+      {titlePart1} <br />
+      <span class="highlight">{titleHighlight}</span>
+    </h1>
+
+    <div class="warranty-badge-outer">
+      <div class="warranty-badge-inner">
+        <span class="label-top">Garantía de</span>
+        <span class="number">{warrantyYears}</span>
+        <span class="label-unit">Años</span>
+        <span class="label-bottom">o {warrantyDistance}</span>
+      </div>
+    </div>
+
+    <p class="partner">
+      Con el respaldo de <span>{partnerName}</span>
+    </p>
+  </div>
+
+  <div class="fade-bottom"></div>
+</section>
+
+<style define:vars={{ brandColor, inkColor }}>
+  .hero-warranty {
+    position: relative;
+    display: flex;
+    min-height: 88vh;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background-color: var(--inkColor);
+    font-family: system-ui, -apple-system, sans-serif;
+  }
+
+  .bg-image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.6;
+  }
+
+  .overlay-radial {
+    position: absolute;
+    inset: 0;
+    /* Usamos color-mix para replicar la profundidad del original */
+    background: radial-gradient(
+      ellipse at center, 
+      transparent 0%, 
+      color-mix(in oklab, var(--inkColor) 90%, transparent) 80%
+    );
+  }
+
+  .container {
+    position: relative;
+    z-index: 10;
+    margin-inline: auto;
+    max-width: 64rem;
+    padding-inline: 1.5rem;
+    text-align: center;
+    color: white;
+  }
+
+  .tagline {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.4em;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 1.5rem;
+  }
+
+  .title {
+    font-size: clamp(2.5rem, 8vw, 4.5rem); /* Responsive sin media queries */
+    font-weight: 900;
+    text-transform: uppercase;
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    margin-bottom: 3rem;
+  }
+
+  .highlight {
+    color: var(--brandColor);
+  }
+
+  /* Badge de Garantía */
+  .warranty-badge-outer {
+    margin-inline: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: clamp(14rem, 40vw, 18rem);
+    height: clamp(14rem, 40vw, 18rem);
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(4px);
+    background: radial-gradient(
+      circle, 
+      color-mix(in oklab, var(--brandColor) 25%, transparent) 0%, 
+      transparent 70%
+    );
+  }
+
+  .warranty-badge-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+    height: 80%;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    background-color: color-mix(in oklab, var(--inkColor) 40%, transparent);
+  }
+
+  .label-top {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .number {
+    font-size: clamp(4.5rem, 15vw, 6rem);
+    font-weight: 900;
+    line-height: 1;
+    color: var(--brandColor);
+  }
+
+  .label-unit {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .label-bottom {
+    margin-top: 0.25rem;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  .partner {
+    margin-top: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  .partner span {
+    font-weight: 700;
+    color: white;
+    letter-spacing: 0.1em;
+  }
+
+  .fade-bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 8rem;
+    background: linear-gradient(to top, var(--inkColor), transparent);
+  }
+</style>

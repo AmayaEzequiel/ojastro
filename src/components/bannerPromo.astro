@@ -1,0 +1,199 @@
+
+
+
+<section id="promociones" class="promociones">
+  <div class="promociones-container">
+    
+    <!-- Imagen de fondo -->
+    <img 
+      src="/assets/promo-bg-98F8cgfH.jpg" 
+      alt="" 
+      aria-hidden="true" 
+      loading="lazy"
+      class="promociones-bg"
+    >
+
+    <!-- Overlay con degradado -->
+    <div class="promociones-overlay"></div>
+
+    <!-- Contenido -->
+    <div class="promociones-content">
+      <div class="promociones-texto">
+
+        <!-- Badge "Solo este mes" -->
+        <span class="promociones-badge">
+          <span class="promociones-badge-dot"></span>
+          Solo este mes
+        </span>
+
+        <!-- Título -->
+        <h2 class="promociones-titulo">
+          Promociones<br>
+          <span class="promociones-titulo-brand">Exclusivas</span>
+        </h2>
+
+        <!-- Descripción -->
+        <p class="promociones-descripcion">
+          Descuentos, financiamiento preferencial y bonos especiales en toda la línea OMODA y JAECOO.
+        </p>
+
+        <!-- Botón -->
+        <a href="#" class="promociones-boton">
+          Descúbrelas Aquí
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M5 12h14M13 5l7 7-7 7"></path>
+          </svg>
+        </a>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+    #promociones {
+  position: relative;
+  overflow: hidden;
+}
+
+.promociones-container {
+  position: relative;
+  height: 500px;
+}
+
+@media (min-width: 768px) {
+  .promociones-container {
+    height: 420px;
+  }
+}
+
+/* Imagen de fondo */
+.promociones-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+/* Overlay degradado */
+.promociones-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: linear-gradient(
+    90deg,
+    color-mix(in oklab, var(--ink) 90%, transparent) 0%,
+    color-mix(in oklab, var(--ink) 60%, transparent) 50%,
+    transparent 100%
+  );
+}
+
+/* Contenido principal */
+.promociones-content {
+  position: relative;
+  z-index: 10;
+  height: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  padding: 0 24px;
+}
+
+.promociones-texto {
+  max-width: 520px;
+  color: white;
+}
+
+/* Badge */
+.promociones-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+  padding: 6px 16px;
+  border-radius: 9999px;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+}
+
+.promociones-badge-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background: var(--brand);
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+/* Título */
+.promociones-titulo {
+  margin-top: 24px;
+  font-size: 2.75rem;
+  line-height: 0.95;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.025em;
+}
+
+@media (min-width: 768px) {
+  .promociones-titulo {
+    font-size: 3.75rem;
+  }
+}
+
+.promociones-titulo-brand {
+  color: var(--brand);
+}
+
+/* Descripción */
+.promociones-descripcion {
+  margin-top: 20px;
+  max-width: 400px;
+  font-size: 1.05rem;
+  color: rgba(255, 255, 255, 0.75);
+  line-height: 1.5;
+}
+
+/* Botón */
+.promociones-boton {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 32px;
+  padding: 16px 32px;
+  border: 2px solid white;
+  border-radius: 9999px;
+  color: white;
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  transition: all 0.3s ease;
+}
+
+.promociones-boton:hover {
+  background: white;
+  color: var(--ink); /* o el color oscuro que uses */
+  transform: translateY(-2px);
+}
+
+.promociones-boton svg {
+  transition: transform 0.3s ease;
+}
+
+.promociones-boton:hover svg {
+  transform: translateX(4px);
+}
+</style>

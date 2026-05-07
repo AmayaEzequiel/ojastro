@@ -1,0 +1,18 @@
+---
+import Hero from "../components/hero.astro";
+import Models from "../components/models.astro";
+import Default from "../layouts/default.astro";
+import { misModelos } from '../data/modelos.js';
+---
+
+<Default>
+  <Hero
+    titlePart1="Protección"
+    titleHighlight="Inigualable"
+    warrantyYears="20"
+    warrantyDistance="150,000 km"
+    brandColor="#ff4d00"
+  />
+
+  <Models models={misModelos} />
+</Default>

@@ -1,0 +1,466 @@
+---
+const { brand, name, badge, image, urlPage, urlSpecs } = Astro.props;
+
+const isOmoda = brand?.toLowerCase() === 'omoda';
+const brandClass = isOmoda ? 'brand-omoda' : 'brand-jaecoo';
+const glowClass = isOmoda ? 'brand-omoda-bg' : 'brand-jaecoo-bg';
+---
+
+<div class="model-card">
+  <span class={`brand-tag ${brandClass}`}>{brand}</span>
+  
+  <div class="car-image-container">
+    <div class={`glow-effect ${glowClass}`}></div>
+    <img src={image} alt={name} class="car-img" />
+  </div>
+
+  <div class="model-info">
+    <span class="model-name">{name}</span>
+    {badge && <span class={`model-badge ${brandClass}`}>{badge}</span>}
+  </div>
+
+  <div class="card-actions">
+    <a class="btn-explore" href=`${urlPage}`>Explora</a>
+    <a 
+        class="btn-specs" 
+        href={`${urlSpecs}`}
+    >
+      Ficha técnica
+  </a>
+  </div>
+</div>
+
+  <style>
+
+:root {
+  --brand: #eab308; /* Tu color amarillo/dorado */
+  --ink: #000000;   /* Tu color de fondo oscuro */
+}
+
+.main-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  transition: all 0.3s ease;
+  /* El degradado usa color-mix o fallback a negro con transparencia */
+  background: linear-gradient(to bottom, color-mix(in oklab, var(--ink) 70%, transparent), transparent);
+  backdrop-filter: blur(4px);
+  border-bottom: 1px solid transparent;
+}
+
+.header-container {
+  max-width: 1280px; /* max-w-7xl */
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem; /* py-4 px-6 */
+}
+
+/* Logos */
+.logo-group {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+}
+
+.logo-text {
+  font-size: 1.125rem;
+  font-weight: 900;
+  letter-spacing: 0.2em;
+  color: #ffffff;
+}
+
+.divider {
+  height: 1rem;
+  width: 1px;
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Navegación */
+.nav-menu {
+  display: none; /* Oculto en móvil */
+  align-items: center;
+  gap: 2rem;
+}
+
+@media (min-width: 1024px) {
+  .nav-menu { display: flex; }
+}
+
+.nav-link {
+  position: relative;
+  font-size: 0.875rem;
+  font-medium: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+  color: #ffffff;
+}
+
+.nav-underline {
+  position: absolute;
+  bottom: -0.25rem;
+  left: 0;
+  height: 2px;
+  width: 0;
+  background-color: var(--brand);
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover .nav-underline {
+  width: 100%;
+}
+
+/* Botón de Promociones */
+.cta-group {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .cta-group { display: flex; }
+}
+
+.btn-promociones {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: var(--brand);
+  color: #ffffff;
+  padding: 0.625rem 1.25rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-decoration: none;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+}
+
+.btn-promociones:hover {
+  transform: scale(1.05);
+}
+
+.pulse-dot {
+  height: 0.5rem;
+  width: 0.5rem;
+  background-color: #ffffff;
+  border-radius: 50%;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: .5; }
+}
+
+/* Botón Móvil */
+.mobile-menu-btn {
+  display: flex;
+  height: 2.5rem;
+  width: 2.5rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.375rem;
+  color: #ffffff;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+
+
+
+
+
+@media (min-width: 1024px) {
+  .mobile-menu-btn { display: none; }
+}
+
+
+.mobile-nav {
+  display: block; /* Por defecto se muestra, pero el contenedor padre suele controlarlo */
+  overflow: hidden;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: var(--ink);
+  height: auto;
+  opacity: 1;
+}
+
+/* Ocultar en pantallas grandes (Desktop) */
+@media (min-width: 1024px) {
+  .mobile-nav {
+    display: none;
+  }
+}
+
+.mobile-nav-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem; /* gap-1 */
+  padding: 1rem 1.5rem; /* py-4 px-6 */
+}
+
+.mobile-link {
+  display: block;
+  border-radius: 0.375rem; /* rounded-md */
+  padding: 0.75rem; /* py-3 px-3 */
+  font-size: 0.875rem; /* text-sm */
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em; /* tracking-wider */
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.mobile-link:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  color: #ffffff;
+}
+
+.mobile-btn-promo {
+  margin-top: 0.5rem; /* mt-2 */
+  display: block;
+  text-align: center;
+  border-radius: 9999px; /* rounded-full */
+  padding: 0.75rem 1.25rem;
+  font-size: 0.75rem; /* text-xs */
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+  background-color: var(--brand);
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.mobile-btn-promo:hover {
+  opacity: 0.9;
+}
+
+
+
+
+:root {
+  --brand-color: #00f2ff; /* Color cian de OMODA */
+  --bg-dark: #0a0a0a;
+  --card-bg: rgba(255, 255, 255, 0.03);
+  --card-border: rgba(255, 255, 255, 0.05);
+}
+
+.mega-menu-catalog {
+  display: none;
+  background-color: var(--bg-dark);
+  padding: 40px 24px;
+  font-family: system-ui, -apple-system, sans-serif;
+  color: white;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+/* Encabezado */
+.catalog-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 24px;
+}
+
+.subtitle {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.4em;
+  color: rgba(255, 255, 255, 0.5);
+  margin: 0;
+}
+
+.main-title {
+  font-size: 24px;
+  font-weight: 900;
+  text-transform: uppercase;
+  margin: 4px 0 0 0;
+}
+
+.card-actions{
+  a{
+    text-decoration: none;
+  }
+}
+
+
+
+.view-all {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.view-all:hover { color: white; }
+
+/* Grid */
+.models-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+@media (min-width: 1280px) {
+  .models-grid { grid-template-columns: repeat(5, 1fr); }
+}
+
+/* Card Estilos */
+.model-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  padding: 16px;
+  text-decoration: none;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.model-card:hover {
+  transform: translateY(-4px);
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Etiquetas de Marca */
+.brand-tag {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.brand-omoda { color: var(--brand-color); }
+.brand-jaecoo { color: rgba(143, 220, 34, 0.795); }
+
+/* Contenedor de Imagen y Glow */
+.car-image-container {
+  position: relative;
+  height: 96px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.glow-effect {
+  position: absolute;
+  bottom: 8px;
+  left: 16px;
+  right: 16px;
+  height: 8px;
+  border-radius: 50%;
+  filter: blur(12px);
+  opacity: 0.3;
+  transition: opacity 0.3s;
+}
+
+.brand-omoda-bg { background: var(--brand-color); }
+.brand-jaecoo-bg { background: white; }
+
+.model-card:hover .glow-effect { opacity: 0.6; }
+
+.car-img {
+  max-width: 190px;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  transition: transform 0.5s;
+}
+
+
+
+.model-card:hover .car-img { transform: scale(1.1); }
+
+/* Info del Modelo */
+.model-info {
+  margin-top: 12px;
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.model-name {
+  font-size: 24px;
+  font-weight: 900;
+  color: white;
+}
+
+.model-badge {
+  font-size: 10px;
+  font-weight: 700;
+}
+
+/* Botones inferiores */
+.card-actions {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+}
+
+.btn-explore, .btn-specs {
+  padding: 6px;
+  text-align: center;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  border-radius: 6px;
+  transition: 0.3s;
+}
+
+.btn-explore {
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: white;
+}
+.model-card:hover .btn-explore { border-color: rgba(255, 255, 255, 0.4); }
+.btn-specs {
+  color: rgba(255, 255, 255, 0.5);
+}
+.model-card:hover .btn-specs { color: rgba(255, 255, 255, 0.8); }
+/* Ocultar acciones del card en dispositivos móviles (menos de 1024px) */
+@media (max-width: 1023px) {
+  .card-actions {
+    display: none;
+  }
+  
+  /* Opcional: Ajustar el padding inferior del card para que no quede mucho espacio vacío */
+  .model-card {
+    padding-bottom: 20px;
+  }
+
+  /* Opcional: Hacer el nombre un poco más pequeño en móvil si es necesario */
+  .model-name {
+    font-size: 20px;
+  }
+}
+</style>
