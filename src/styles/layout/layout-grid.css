@@ -1,0 +1,207 @@
+/* Grid de modelos */
+.models-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+@media (min-width: 1280px) {
+  .models-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+/* Tarjetas de modelo */
+.model-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  padding: 16px;
+  text-decoration: none;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.model-card:hover {
+  transform: translateY(-4px);
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.brand-tag {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.brand-omoda {
+  color: var(--brand-color);
+}
+
+.brand-jaecoo {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.car-image-container {
+  position: relative;
+  height: 96px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.glow-effect {
+  position: absolute;
+  bottom: 8px;
+  left: 16px;
+  right: 16px;
+  height: 8px;
+  border-radius: 50%;
+  filter: blur(12px);
+  opacity: 0.3;
+  transition: opacity 0.3s;
+}
+
+.brand-omoda-bg {
+  background: var(--brand-color);
+}
+
+.brand-jaecoo-bg {
+  background: white;
+}
+
+.model-card:hover .glow-effect {
+  opacity: 0.6;
+}
+
+.car-img {
+  max-width: 740px;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  transition: transform 0.5s;
+}
+
+.model-card:hover .car-img {
+  transform: scale(1.1);
+}
+
+.model-info {
+  flex-direction: column;
+  margin-top: 12px;
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.model-name {
+  font-size: 24px;
+  font-weight: 900;
+  color: rgb(0, 0, 0);
+}
+
+.model-badge {
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.card-actions {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+}
+
+.btn-explore,
+.btn-specs {
+  padding: 4px;
+  text-align: center;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  border-radius: 6px;
+  transition: 0.3s;
+}
+
+.btn-explore {
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: white;
+}
+
+.model-card:hover .btn-explore {
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.btn-specs {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.model-card:hover .btn-specs {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Lógica de visibilidad de modelos */
+.model-item {
+  display: block;
+}
+
+/* Ocultar desde el 4to en adelante en móvil */
+.model-item:nth-child(n + 4) {
+  display: none;
+}
+
+/* En desktop, ocultar desde el 6to en adelante */
+@media (min-width: 1024px) {
+  .model-item:nth-child(n + 4) {
+    display: block;
+  }
+  
+  .model-item:nth-child(n + 6) {
+    display: none;
+  }
+}
+
+/* Expansión de grid */
+.models-grid.show-all .model-item {
+  display: block !important;
+  animation: fadeIn 0.5s ease forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Botón "Ver todos" */
+#btn-ver-todos {
+  display: none;
+}
+
+/* Mostrar botón según cantidad de modelos */
+@media (max-width: 1023px) {
+  .models-grid:has(.model-item:nth-child(4)) ~ .catalog-header #btn-ver-todos,
+  .catalog-header:has(~ .models-grid .model-item:nth-child(4)) #btn-ver-todos {
+    display: flex;
+  }
+}
+
+@media (min-width: 1024px) {
+  .models-grid:has(.model-item:nth-child(6)) ~ .catalog-header #btn-ver-todos,
+  .catalog-header:has(~ .models-grid .model-item:nth-child(6)) #btn-ver-todos {
+    display: flex;
+  }
+}

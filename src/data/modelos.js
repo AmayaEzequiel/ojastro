@@ -23,7 +23,7 @@ export const misModelos = [
         brand: "OMODA",
         name: "C7",
         image: "./img/c7.png",
-        urlPage: "/c5",   // Nueva propiedad
+        urlPage: "/c7",   // Nueva propiedad
         urlSpecs: "/pdf/c5.pdf",  // Nueva propiedad
         specs: [
             "Motor de 1.6L Turbo",

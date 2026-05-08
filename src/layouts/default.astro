@@ -2,6 +2,7 @@
 import ModelCard from "../components/ModelCard.astro";
 import { misModelos } from "../data/modelos.js";
 
+
 // Filtramos: solo pasan los modelos que tienen ambos campos con texto
 const modelosDisponibles = misModelos.filter(
   (modelo) =>
@@ -10,9 +11,6 @@ const modelosDisponibles = misModelos.filter(
     modelo.urlSpecs &&
     modelo.urlSpecs.trim() !== "",
 );
-
-
-
 
 export interface Props {
   title?: string;
@@ -23,15 +21,10 @@ export interface Props {
   ogUrl?: string;
   canonical?: string;
   keywords?: string;
-  // Para scripts adicionales
   headScripts?: Array<{ src?: string; content?: string; attributes?: Record<string, string> }>;
-  // Para estilos adicionales
   headStyles?: Array<{ href?: string; content?: string }>;
-  // Para metas adicionales
   extraMetas?: Array<{ name?: string; property?: string; content: string }>;
-  // Para links adicionales
   extraLinks?: Array<{ rel: string; href: string; [key: string]: any }>;
-  // Scripts inline
   inlineScripts?: string[];
 }
 
@@ -40,7 +33,7 @@ const {
   description = "Dos marcas que comparten una misma esencia: diseño, tecnología y alto desempeño.",
   ogTitle = "OMODA JAECOO | Tecnología con estilo.",
   ogDescription = "Dos marcas que comparten una misma esencia: diseño, tecnología y alto desempeño.",
-  ogImage = "https://www.omodajaecoo.com.pa/images/og-image.png",
+  ogImage = "https://www.omodajaecoo.com.pa/img/og-image.png",
   ogUrl = "https://www.omodajaecoo.com.pa/",
   canonical = "https://www.omodajaecoo.com.pa/",
   keywords = "OMODA, JAECOO, autos, Panamá, SUV, tecnología",
@@ -50,8 +43,8 @@ const {
   extraLinks = [],
   inlineScripts = []
 } = Astro.props;
-
 ---
+
 <!doctype html>
 <html lang="es">
   <head>
@@ -114,7 +107,12 @@ const {
     </noscript>
 
     <!-- Estilos base -->
-    <link rel="stylesheet" href="/styles/estilos.css" />
+
+    
+    <!-- Estilos del Layout -->
+    <link rel="stylesheet" href="/src/styles/layout/layout.css"/>
+    <link rel="stylesheet" href="/src/styles/layout/layout-mobile.css"/>
+    <link rel="stylesheet" href="/src/styles/layout/layout-grid.css"/>
 
     <!-- Estilos adicionales desde props -->
     {headStyles.map((style, index) => (
@@ -149,7 +147,7 @@ const {
   <body>
     <header class="main-header">
       <div class="header-container">
-        <a href="#" class="logo-group">
+        <a href="/" class="logo-group">
           <span class="logo-text">OMODA</span>
           <span class="divider"></span>
           <span class="logo-text">JAECOO</span>
@@ -159,7 +157,7 @@ const {
           <button
             id="btn-modelos"
             class="nav-link"
-            style="background: none; border: none; cursor: pointer;"
+            aria-label="Ver modelos"
           >
             Modelos<span class="nav-underline"></span>
           </button>
@@ -198,20 +196,19 @@ const {
         </button>
       </div>
 
-      <section class="mega-menu-catalog">
+      <section class="mega-menu-catalog" id="megaMenuCatalog">
         <div class="container">
           <div class="catalog-header">
             <div class="title-group">
               <p class="subtitle">Catálogo</p>
               <h3 class="main-title">Nuestros modelos</h3>
             </div>
-            <!-- Cambiamos el link por un botón o le damos un ID para controlarlo -->
             {
               modelosDisponibles.length > 3 && (
                 <button
                   id="btn-ver-todos"
                   class="view-all"
-                  style="background:none; border:none; cursor:pointer;"
+                  aria-label="Ver todos los modelos"
                 >
                   Ver todos
                 </button>
@@ -222,8 +219,7 @@ const {
           <div class="models-grid" id="grid-modelos">
             {
               modelosDisponibles.map((modelo, index) => (
-                /* Quitamos el ternario y solo dejamos la clase base */
-                <div class="model-item">
+                <div class="model-item" data-index={index}>
                   <ModelCard
                     brand={modelo.brand}
                     name={modelo.name}
@@ -238,734 +234,308 @@ const {
 
             {
               modelosDisponibles.length === 0 && (
-                <p>Próximamente más modelos disponibles.</p>
+                <p class="no-models">Próximamente más modelos disponibles.</p>
               )
             }
           </div>
         </div>
       </section>
+      
       <div class="mobile-nav" id="mobileMenu">
         <div class="mobile-nav-container">
           <a href="#cotiza" class="mobile-link">Cotiza tu auto</a>
           <a href="#sucursales" class="mobile-link">Sucursales</a>
           <a href="#postventa" class="mobile-link">Post Venta</a>
           <a href="#sobre" class="mobile-link">Sobre Nosotros</a>
-
           <a href="#promociones" class="mobile-btn-promo">
             Promociones del mes
           </a>
         </div>
       </div>
     </header>
+    
     <main>
       <slot />
     </main>
+
+ <style>
+        :root {
+            --ink: #0a0a0b;
+            --ink-foreground: #ffffff;
+            --brand: #e53935;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Signika Negative', 'Raleway', Arial, sans-serif;
+        }
+
+        .footer {
+            position: relative;
+            overflow: hidden;
+            background: var(--ink);
+            color: var(--ink-foreground);
+        }
+
+        .footer-gradient {
+            height: 4px;
+            width: 100%;
+            background: linear-gradient(90deg, transparent, var(--brand), transparent);
+        }
+
+        .footer-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 64px 24px;
+        }
+
+        .footer-grid {
+            display: grid;
+            gap: 48px;
+        }
+
+        @media (min-width: 768px) {
+            .footer-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        /* Columna 1 - Logo y redes sociales */
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .footer-logo span {
+            font-size: 20px;
+            font-weight: 900;
+            letter-spacing: 0.2em;
+        }
+
+        .footer-logo .divider {
+            height: 20px;
+            width: 1px;
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .footer-description {
+            margin-top: 20px;
+            max-width: 384px;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.6;
+        }
+
+        .footer-social {
+            margin-top: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .social-link {
+            display: flex;
+            height: 40px;
+            width: 40px;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            background: transparent;
+        }
+
+        .social-link:hover {
+            border-color: transparent;
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Columna 2 - Navegación */
+        .footer-title {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .footer-nav {
+            margin-top: 20px;
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .footer-nav a {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-nav a:hover {
+            color: #ffffff;
+        }
+
+        /* Columna 3 - Apps */
+        .app-buttons {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .app-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 10px 20px;
+            font-size: 14px;
+            text-decoration: none;
+            color: #ffffff;
+            transition: border-color 0.3s ease;
+        }
+
+        .app-button:hover {
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        .app-button svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        /* Footer bottom */
+        .footer-bottom {
+            margin-top: 48px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 24px;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        @media (min-width: 768px) {
+            .footer-bottom {
+                flex-direction: row;
+            }
+        }
+
+        .footer-bottom p {
+            margin: 0;
+        }
+    </style>
+<footer class="footer">
+        <!-- Línea degradada superior -->
+        <div class="footer-gradient"></div>
+
+        <div class="footer-container">
+            <div class="footer-grid">
+                
+                <!-- Columna 1: Logo y redes sociales -->
+                <div>
+                    <div class="footer-logo">
+                        <span>OMODA</span>
+                        <span class="divider"></span>
+                        <span>JAECOO</span>
+                    </div>
+                    <p class="footer-description">
+                        Distribuidor oficial respaldado por Grupo Silaba. Tu nuevo SUV te espera.
+                    </p>
+                    <div class="footer-social">
+                        <!-- Instagram -->
+                        <a href="#" aria-label="Instagram" class="social-link">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="3" width="18" height="18" rx="5"></rect>
+                                <circle cx="12" cy="12" r="4"></circle>
+                                <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"></circle>
+                            </svg>
+                        </a>
+                        
+                        <!-- Facebook -->
+                        <a href="#" aria-label="Facebook" class="social-link">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M22 12a10 10 0 10-11.6 9.9v-7H8v-3h2.4V9.5c0-2.4 1.4-3.7 3.6-3.7 1 0 2 .2 2 .2v2.3h-1.2c-1.2 0-1.5.7-1.5 1.5V12h2.6l-.4 3h-2.2v7A10 10 0 0022 12z"></path>
+                            </svg>
+                        </a>
+                        
+                        <!-- TikTok -->
+                        <a href="#" aria-label="TikTok" class="social-link">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M19.6 6.7a4.8 4.8 0 01-3-1.7 4.8 4.8 0 01-1.1-3H12v12.4a2.8 2.8 0 11-2-2.7v-3.4a6.1 6.1 0 105.5 6V9.7a8 8 0 004.6 1.5V7.8a4.8 4.8 0 01-.5-1.1z"></path>
+                            </svg>
+                        </a>
+                        
+                        <!-- YouTube -->
+                        <a href="#" aria-label="YouTube" class="social-link">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M23 7.5a3 3 0 00-2.1-2.1C19 5 12 5 12 5s-7 0-8.9.4A3 3 0 001 7.5 31 31 0 001 12a31 31 0 000 4.5 3 3 0 002.1 2.1C5 19 12 19 12 19s7 0 8.9-.4a3 3 0 002.1-2.1 31 31 0 000-9zM10 15.5v-7l6 3.5-6 3.5z"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Columna 2: Navegación -->
+                <div>
+                    <h4 class="footer-title">Navegación</h4>
+                    <ul class="footer-nav">
+                        <li><a href="#modelos">Modelos</a></li>
+                        <li><a href="#cotiza">Agendar Cita</a></li>
+                        <li><a href="#sucursales">Sucursales</a></li>
+                        <li><a href="#postventa">Post Venta</a></li>
+                        <li><a href="#sobre">Sobre Nosotros</a></li>
+                    </ul>
+                </div>
+
+                <!-- Columna 3: Apps -->
+                <div>
+                    <h4 class="footer-title">Descarga la app</h4>
+                    <div class="app-buttons">
+                        <a href="#" class="app-button">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M3 20.5V3.5c0-.6.3-1.1.8-1.4l10.6 9.9L3.8 21.9c-.5-.3-.8-.8-.8-1.4zM16.8 13.7l3-2.8c.7-.4.7-1.4 0-1.8l-3-2.8-3.4 3.7 3.4 3.7zM5.2 2.6l9.9 5.7-2.9 3.2-7-8.9zM12.2 12.5l2.9 3.2-9.9 5.7 7-8.9z"></path>
+                            </svg>
+                            Google Play
+                        </a>
+                        <a href="#" class="app-button">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M17.5 12.7c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.1-2.8.9-3.5.9-.7 0-1.9-.8-3.1-.8-1.6 0-3 .9-3.9 2.4-1.6 2.8-.4 7 1.2 9.3.8 1.1 1.7 2.4 2.9 2.3 1.2 0 1.6-.8 3.1-.8s1.9.8 3.1.7c1.3 0 2.1-1.1 2.9-2.3.9-1.3 1.3-2.6 1.3-2.7-.1 0-2.6-1-2.6-3.7zM15.2 5.8c.6-.8 1.1-1.9 1-3-.9 0-2 .6-2.7 1.4-.6.7-1.2 1.8-1 2.9 1.1.1 2.1-.5 2.7-1.3z"></path>
+                            </svg>
+                            App Store
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Footer bottom -->
+            <div class="footer-bottom">
+                <p>© 2026 Grupo Silaba. Todos los derechos reservados.</p>
+                <p>Diseño con visión de futuro.</p>
+            </div>
+        </div>
+    </footer>
+
+
+    
+    <!-- Scripts al final del body para mejor performance -->
+    <script is:inline src="./src/scripts/layout/layout.js" defer></script>
   </body>
 </html>
-
-<style>
-  :root {
-    --brand: #eab308; /* Tu color amarillo/dorado */
-    --ink: #000000; /* Tu color de fondo oscuro */
-  }
-
-  .main-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 50;
-    transition: all 0.3s ease;
-    /* El degradado usa color-mix o fallback a negro con transparencia */
-    background: linear-gradient(
-      to bottom,
-      color-mix(in oklab, var(--ink) 70%, transparent),
-      transparent
-    );
-    backdrop-filter: blur(4px);
-    border-bottom: 1px solid transparent;
-  }
-
-  .header-container {
-    max-width: 1280px; /* max-w-7xl */
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1rem 1.5rem; /* py-4 px-6 */
-  }
-
-  /* Logos */
-  .logo-group {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    text-decoration: none;
-  }
-
-  .logo-text {
-    font-size: 1.125rem;
-    font-weight: 900;
-    letter-spacing: 0.2em;
-    color: #ffffff;
-  }
-
-  .divider {
-    height: 1rem;
-    width: 1px;
-    background-color: rgba(255, 255, 255, 0.3);
-  }
-
-  /* Navegación */
-  .nav-menu {
-    display: none; /* Oculto en móvil */
-    align-items: center;
-    gap: 2rem;
-  }
-
-  @media (min-width: 1024px) {
-    .nav-menu {
-      display: flex;
-    }
-  }
-
-  .nav-link {
-    position: relative;
-    font-size: 0.875rem;
-    font-medium: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: rgba(255, 255, 255, 0.8);
-    text-decoration: none;
-    transition: color 0.3s ease;
-  }
-
-  .nav-link:hover {
-    color: #ffffff;
-  }
-
-  .nav-underline {
-    position: absolute;
-    bottom: -0.25rem;
-    left: 0;
-    height: 2px;
-    width: 0;
-    background-color: var(--brand);
-    transition: width 0.3s ease;
-  }
-
-  .nav-link:hover .nav-underline {
-    width: 100%;
-  }
-
-  /* Botón de Promociones */
-  .cta-group {
-    display: none;
-  }
-
-  @media (min-width: 1024px) {
-    .cta-group {
-      display: flex;
-    }
-  }
-
-  .btn-promociones {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    background-color: var(--brand);
-    color: #ffffff;
-    padding: 0.625rem 1.25rem;
-    border-radius: 9999px;
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    text-decoration: none;
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease;
-  }
-
-  .btn-promociones:hover {
-    transform: scale(1.05);
-  }
-
-  .pulse-dot {
-    height: 0.5rem;
-    width: 0.5rem;
-    background-color: #ffffff;
-    border-radius: 50%;
-    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-  }
-
-  @keyframes pulse {
-    0%,
-    100% {
-      opacity: 1;
-    }
-    50% {
-      opacity: 0.5;
-    }
-  }
-
-  /* Botón Móvil */
-  .mobile-menu-btn {
-    display: flex;
-    height: 2.5rem;
-    width: 2.5rem;
-    align-items: center;
-    justify-content: center;
-    border-radius: 0.375rem;
-    color: #ffffff;
-    background: none;
-    border: none;
-    cursor: pointer;
-  }
-
-  @media (min-width: 1024px) {
-    .mobile-menu-btn {
-      display: none;
-    }
-  }
-
-  .mobile-nav {
-    display: none; /* Cambiado de block a none */
-    overflow: hidden;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    background-color: var(--ink);
-  }
-
-  /* Clase para activar el menú móvil */
-  .mobile-nav.is-open {
-    display: block;
-    animation: slideIn 0.3s ease-out;
-  }
-
-  @keyframes slideIn {
-    from {
-      opacity: 0;
-      transform: translateY(-10px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  /* Asegurarnos que en desktop siga oculto aunque tenga la clase is-open */
-  @media (min-width: 1024px) {
-    .mobile-nav,
-    .mobile-nav.is-open {
-      display: none;
-    }
-  }
-
-  .mobile-nav-container {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem; /* gap-1 */
-    padding: 1rem 1.5rem; /* py-4 px-6 */
-  }
-
-  .mobile-link {
-    display: block;
-    border-radius: 0.375rem; /* rounded-md */
-    padding: 0.75rem; /* py-3 px-3 */
-    font-size: 0.875rem; /* text-sm */
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.05em; /* tracking-wider */
-    color: rgba(255, 255, 255, 0.8);
-    text-decoration: none;
-    transition: all 0.2s ease;
-  }
-
-  .mobile-link:hover {
-    background-color: rgba(255, 255, 255, 0.05);
-    color: #ffffff;
-  }
-
-  .mobile-btn-promo {
-    margin-top: 0.5rem; /* mt-2 */
-    display: block;
-    text-align: center;
-    border-radius: 9999px; /* rounded-full */
-    padding: 0.75rem 1.25rem;
-    font-size: 0.75rem; /* text-xs */
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: #ffffff;
-    background-color: var(--brand);
-    text-decoration: none;
-    transition: opacity 0.2s ease;
-  }
-
-  .mobile-btn-promo:hover {
-    opacity: 0.9;
-  }
-
-  :root {
-    --brand-color: #00f2ff; /* Color cian de OMODA */
-    --bg-dark: #0a0a0a;
-    --card-bg: rgba(255, 255, 255, 0.03);
-    --card-border: rgba(255, 255, 255, 0.05);
-  }
-
-  .mega-menu-catalog {
-    display: none;
-    top: 100%; /* Justo debajo del header */
-    left: 0;
-
-    background-color: var(--bg-dark);
-    padding: 40px 24px;
-    z-index: 100;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-  }
-
-  /* Clase que aplicaremos con JS para mostrarlo */
-  .mega-menu-catalog.is-active {
-    display: block;
-    animation: fadeIn 0.3s ease;
-  }
-
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(-10px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  .container {
-    max-width: 1280px;
-    margin: 0 auto;
-  }
-
-  /* Encabezado */
-  .catalog-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    margin-bottom: 24px;
-  }
-
-  .subtitle {
-    font-size: 10px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.4em;
-    color: rgba(255, 255, 255, 0.5);
-    margin: 0;
-  }
-
-  .title-group {
-    .main-title {
-      font-size: 24px;
-      font-weight: 900;
-      text-transform: uppercase;
-      margin: 4px 0 0 0;
-      color: #ffffff;
-    }
-  }
-
-  .view-all {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 12px;
-    font-weight: 600;
-    text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.7);
-    text-decoration: none;
-    transition: color 0.3s;
-  }
-
-  .view-all:hover {
-    color: white;
-  }
-
-  /* Grid */
-  .models-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-  }
-
-  @media (min-width: 1280px) {
-    .models-grid {
-      grid-template-columns: repeat(5, 1fr);
-    }
-  }
-
-  /* Card Estilos */
-  .model-card {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background: var(--card-bg);
-    border: 1px solid var(--card-border);
-    border-radius: 16px;
-    padding: 16px;
-    text-decoration: none;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .model-card:hover {
-    transform: translateY(-4px);
-    background: rgba(255, 255, 255, 0.07);
-    border-color: rgba(255, 255, 255, 0.2);
-  }
-
-  /* Etiquetas de Marca */
-  .brand-tag {
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    font-size: 9px;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-  }
-
-  .brand-omoda {
-    color: var(--brand-color);
-  }
-  .brand-jaecoo {
-    color: rgba(255, 255, 255, 0.5);
-  }
-
-  /* Contenedor de Imagen y Glow */
-  .car-image-container {
-    position: relative;
-    height: 96px;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .glow-effect {
-    position: absolute;
-    bottom: 8px;
-    left: 16px;
-    right: 16px;
-    height: 8px;
-    border-radius: 50%;
-    filter: blur(12px);
-    opacity: 0.3;
-    transition: opacity 0.3s;
-  }
-
-  .brand-omoda-bg {
-    background: var(--brand-color);
-  }
-  .brand-jaecoo-bg {
-    background: white;
-  }
-
-  .model-card:hover .glow-effect {
-    opacity: 0.6;
-  }
-
-  .car-img {
-    max-width: 190px;
-    width: 100%;
-    height: auto;
-    object-fit: contain;
-    transition: transform 0.5s;
-  }
-
-  .model-card:hover .car-img {
-    transform: scale(1.1);
-  }
-
-  /* Info del Modelo */
-  .model-info {
-    margin-top: 12px;
-    display: flex;
-    align-items: baseline;
-    gap: 4px;
-  }
-
-  .model-name {
-    font-size: 24px;
-    font-weight: 900;
-    color: white;
-  }
-
-  .model-badge {
-    font-size: 10px;
-    font-weight: 700;
-  }
-
-  /* Botones inferiores */
-  .card-actions {
-    margin-top: 12px;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    width: 100%;
-  }
-
-  .btn-explore,
-  .btn-specs {
-    padding: 4px;
-    text-align: center;
-    font-size: 10px;
-    font-weight: 700;
-    text-transform: uppercase;
-    border-radius: 6px;
-    transition: 0.3s;
-  }
-
-  .btn-explore {
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    color: white;
-  }
-  .model-card:hover .btn-explore {
-    border-color: rgba(255, 255, 255, 0.4);
-  }
-  .btn-specs {
-    color: rgba(255, 255, 255, 0.5);
-  }
-  .model-card:hover .btn-specs {
-    color: rgba(255, 255, 255, 0.8);
-  }
-
-  @media (max-width: 1023px) {
-    .mega-menu-catalog {
-      position: static; /* En móvil se apila, no flota */
-      display: none; /* Oculto por defecto */
-      padding: 20px;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
-    }
-
-    /* Cuando el menú móvil está abierto, mostramos el catálogo también */
-    .mobile-nav.is-open + .mega-menu-catalog, /* Si están hermanos */
-  .is-open .mega-menu-catalog,
-  .mega-menu-catalog.is-active-mobile {
-      display: block;
-    }
-
-    .models-grid {
-      grid-template-columns: repeat(
-        3,
-        1fr
-      ); /* 2 columnas en móvil para que quepan */
-      gap: 10px;
-    }
-  }
-
-  /* Ocultar acciones del card en dispositivos móviles (menos de 1024px) */
-  @media (max-width: 1023px) {
-    .card-actions {
-      display: none;
-    }
-
-    /* Opcional: Ajustar el padding inferior del card para que no quede mucho espacio vacío */
-    .model-card {
-      padding-bottom: 20px;
-    }
-
-    /* Opcional: Hacer el nombre un poco más pequeño en móvil si es necesario */
-    .model-name {
-      font-size: 20px;
-    }
-  }
-
-  /* Escondemos los modelos que tengan la clase .model-hidden */
-  .model-hidden {
-    display: none;
-  }
-
-  /* Cuando el contenedor tenga la clase 'show-all', mostramos los ocultos */
-  .models-grid.show-all .model-hidden {
-    display: block;
-    animation: fadeIn 0.5s ease forwards;
-  }
-
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(10px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-</style>
-
-<script>
-  const btn = document.getElementById("btn-ver-todos");
-  const grid = document.getElementById("grid-modelos");
-
-  if (btn && grid) {
-    btn.addEventListener("click", () => {
-      grid.classList.toggle("show-all");
-
-      // Opcional: Cambiar el texto del botón
-      if (grid.classList.contains("show-all")) {
-        btn.textContent = "Ver menos";
-      } else {
-        btn.textContent = "Ver todos";
-      }
-    });
-  }
-</script>
-
-<script>
-  const btnMobile = document.querySelector(".mobile-menu-btn");
-  const mobileNav = document.getElementById("mobileMenu");
-  const megaMenu = document.querySelector(".mega-menu-catalog");
-  const btnModelosDesktop = document.getElementById("btn-modelos");
-  const viewAllBtn = document.querySelector(".view-all");
-
-  if (viewAllBtn && megaMenu) {
-    viewAllBtn.addEventListener("click", (e) => {
-      // Evitamos que salte al ID #modelos o recargue
-      e.preventDefault();
-      e.stopPropagation();
-      // Expandimos el grid
-      megaMenu.classList.add("is-expanded");
-    });
-  }
-
-  // Función para cerrar TODO
-  const closeAllMenus = () => {
-    mobileNav?.classList.remove("is-open");
-    megaMenu?.classList.remove("is-active");
-    megaMenu?.classList.remove("is-active-mobile");
-    mobileNav?.classList.remove("is-open");
-    megaMenu?.classList.remove("is-active", "is-active-mobile", "is-expanded");
-    // Resetear icono a hamburguesa
-    const svg = btnMobile?.querySelector("svg");
-    if (svg) svg.innerHTML = '<path d="M3 6h18M3 12h18M3 18h18"></path>';
-  };
-
-  // 1. Manejo del Menú Hamburguesa (Mobile)
-  btnMobile?.addEventListener("click", () => {
-    const isOpen = mobileNav?.classList.toggle("is-open");
-
-    // Sincronización: El catálogo móvil sigue estrictamente al botón hamburguesa
-    if (window.innerWidth < 1024) {
-      megaMenu?.classList.toggle("is-active-mobile", isOpen);
-      // Limpiamos la clase de desktop por si acaso
-      megaMenu?.classList.remove("is-active");
-    }
-    // Cambiar icono
-    const svg = btnMobile.querySelector("svg");
-    if (isOpen) {
-      svg.innerHTML = '<path d="M18 6L6 18M6 6l12 12"></path>';
-    } else {
-      svg.innerHTML = '<path d="M3 6h18M3 12h18M3 18h18"></path>';
-    }
-  });
-  // 2. Manejo del botón Modelos (Desktop)
-  btnModelosDesktop?.addEventListener("click", (e) => {
-    if (window.innerWidth >= 1024) {
-      e.preventDefault();
-      e.stopPropagation(); // Evita que el clic se propague al document
-      megaMenu?.classList.toggle("is-active");
-    }
-  });
-
-  // 3. Limpiador de Resincronización (Resize)
-  // Si el usuario cambia el tamaño de la ventana, cerramos todo para evitar "fantasmas"
-  window.addEventListener("resize", () => {
-    if (window.innerWidth >= 1024) {
-      // Si pasamos a Desktop, cerramos lo que sea de móvil
-      mobileNav?.classList.remove("is-open");
-      megaMenu?.classList.remove("is-active-mobile");
-      const svg = btnMobile?.querySelector("svg");
-      if (svg) svg.innerHTML = '<path d="M3 6h18M3 12h18M3 18h18"></path>';
-    } else {
-      // Si pasamos a Móvil, cerramos lo que sea de desktop
-      megaMenu?.classList.remove("is-active");
-    }
-  });
-
-  // 4. Cerrar al hacer clic fuera (Solo Desktop)
-  document.addEventListener("click", (e) => {
-    if (window.innerWidth >= 1024) {
-      if (!e.target.closest(".main-header")) {
-        megaMenu?.classList.remove("is-active");
-      }
-    }
-  });
-
-  // 5. Cerrar al hacer clic en un enlace
-  document.addEventListener("click", (e) => {
-    if (e.target.closest(".mobile-link") || e.target.closest(".model-card")) {
-      closeAllMenus();
-    }
-  });
-</script>
-
-<style>
-  /* 1. Comportamiento por defecto (Mobile) */
-  .model-item {
-    display: block;
-  }
-
-  /* Ocultar desde el 4to en adelante (índice 3+) */
-  .model-item:nth-child(n + 4) {
-    display: none;
-  }
-
-  /* 2. Comportamiento en Desktop (1024px o más) */
-  @media (min-width: 1024px) {
-    /* Reseteamos el corte de mobile para que se vean hasta 5 */
-    .model-item:nth-child(n + 4) {
-      display: block;
-    }
-
-    /* Ocultar desde el 6to en adelante (índice 5+) */
-    .model-item:nth-child(n + 6) {
-      display: none;
-    }
-  }
-
-  /* 3. Lógica de expansión cuando se hace clic en el botón */
-  .models-grid.show-all .model-item {
-    display: block !important;
-    animation: fadeIn 0.5s ease forwards;
-  }
-
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(10px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  /* Ocultar el botón si no hay elementos ocultos reales */
-  #btn-ver-todos {
-    display: none;
-  }
-
-  /* Mostrar botón en mobile si hay más de 3 */
-  @media (max-width: 1023px) {
-    .models-grid:has(.model-item:nth-child(4)) ~ .catalog-header #btn-ver-todos,
-    .catalog-header:has(~ .models-grid .model-item:nth-child(4))
-      #btn-ver-todos {
-      display: flex;
-    }
-  }
-
-  /* Mostrar botón en desktop si hay más de 5 */
-  @media (min-width: 1024px) {
-    .models-grid:has(.model-item:nth-child(6)) ~ .catalog-header #btn-ver-todos,
-    .catalog-header:has(~ .models-grid .model-item:nth-child(6))
-      #btn-ver-todos {
-      display: flex;
-    }
-  }
-</style>

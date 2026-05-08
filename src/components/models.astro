@@ -122,13 +122,15 @@ const brandAccent = "#0978D3";
   .main-title { text-align: center; font-size: 3rem; font-weight: 900; margin-bottom: 3rem;}
 
   .tabs-container { display: flex; justify-content: center; align-items: center; gap: 1rem; margin-bottom: 4rem; }
-  .tabs-list { display: flex; gap: 0.5rem; border-bottom: 1px solid var(--nav-border); }
+  .tabs-list { display: flex; gap: 1rem; border-bottom: 1px solid var(--nav-border); }
 
   .tab-item {
     background: none; border: none; 
     color: var(--tab-inactive);
     padding: 0.75rem 1.5rem; font-weight: 700;
     cursor: pointer; position: relative; transition: color 0.3s;
+    min-width: 100px;
+    justify-content: center;
   }
 
   .tab-item.active { color: var(--text-main); }
@@ -160,7 +162,7 @@ const brandAccent = "#0978D3";
   .specs-list li { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1rem; color: var(--text-muted); }
   .dot { width: 8px; height: 8px; background: var(--brandAccent); border-radius: 50%; }
 
-  .btn-primary { background: var(--brandAccent); color: #000; border: none; padding: 1rem 2rem; border-radius: 50px; font-weight: 700; cursor: pointer; }
+  .btn-primary { background: var(--brandAccent); color: #ffffff; border: none; padding: 1rem 2rem; border-radius: 50px; font-weight: 700; cursor: pointer; }
   .btn-outline { background: transparent; border: 2px solid var(--brandAccent); color: var(--brandAccent); padding: 1rem 2rem; border-radius: 50px; font-weight: 700; cursor: pointer; }
 
 

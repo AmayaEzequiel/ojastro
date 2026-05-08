@@ -1,2500 +1,620 @@
-<!DOCTYPE html>
-
-<html>
-
-<head>
-
-
- <style type="text/css">
-        .swal-icon--error {
-            border-color: #f27474;
-            -webkit-animation: animateErrorIcon .5s;
-            animation: animateErrorIcon .5s
-        }
-
-        .swal-icon--error__x-mark {
-            position: relative;
-            display: block;
-            -webkit-animation: animateXMark .5s;
-            animation: animateXMark .5s
-        }
-
-        .swal-icon--error__line {
-            position: absolute;
-            height: 5px;
-            width: 47px;
-            background-color: #f27474;
-            display: block;
-            top: 37px;
-            border-radius: 2px
-        }
-
-        .swal-icon--error__line--left {
-            -webkit-transform: rotate(45deg);
-            transform: rotate(45deg);
-            left: 17px
-        }
-
-        .swal-icon--error__line--right {
-            -webkit-transform: rotate(-45deg);
-            transform: rotate(-45deg);
-            right: 16px
-        }
-
-        @-webkit-keyframes animateErrorIcon {
-            0% {
-                -webkit-transform: rotateX(100deg);
-                transform: rotateX(100deg);
-                opacity: 0
-            }
-
-            to {
-                -webkit-transform: rotateX(0deg);
-                transform: rotateX(0deg);
-                opacity: 1
-            }
-        }
-
-        @keyframes animateErrorIcon {
-            0% {
-                -webkit-transform: rotateX(100deg);
-                transform: rotateX(100deg);
-                opacity: 0
-            }
-
-            to {
-                -webkit-transform: rotateX(0deg);
-                transform: rotateX(0deg);
-                opacity: 1
-            }
-        }
-
-        @-webkit-keyframes animateXMark {
-            0% {
-                -webkit-transform: scale(.4);
-                transform: scale(.4);
-                margin-top: 26px;
-                opacity: 0
-            }
-
-            50% {
-                -webkit-transform: scale(.4);
-                transform: scale(.4);
-                margin-top: 26px;
-                opacity: 0
-            }
-
-            80% {
-                -webkit-transform: scale(1.15);
-                transform: scale(1.15);
-                margin-top: -6px
-            }
-
-            to {
-                -webkit-transform: scale(1);
-                transform: scale(1);
-                margin-top: 0;
-                opacity: 1
-            }
-        }
-
-        @keyframes animateXMark {
-            0% {
-                -webkit-transform: scale(.4);
-                transform: scale(.4);
-                margin-top: 26px;
-                opacity: 0
-            }
-
-            50% {
-                -webkit-transform: scale(.4);
-                transform: scale(.4);
-                margin-top: 26px;
-                opacity: 0
-            }
-
-            80% {
-                -webkit-transform: scale(1.15);
-                transform: scale(1.15);
-                margin-top: -6px
-            }
-
-            to {
-                -webkit-transform: scale(1);
-                transform: scale(1);
-                margin-top: 0;
-                opacity: 1
-            }
-        }
-
-        .swal-icon--warning {
-            border-color: #f8bb86;
-            -webkit-animation: pulseWarning .75s infinite alternate;
-            animation: pulseWarning .75s infinite alternate
-        }
-
-        .swal-icon--warning__body {
-            width: 5px;
-            height: 47px;
-            top: 10px;
-            border-radius: 2px;
-            margin-left: -2px
-        }
-
-        .swal-icon--warning__body,
-        .swal-icon--warning__dot {
-            position: absolute;
-            left: 50%;
-            background-color: #f8bb86
-        }
-
-        .swal-icon--warning__dot {
-            width: 7px;
-            height: 7px;
-            border-radius: 50%;
-            margin-left: -4px;
-            bottom: -11px
-        }
-
-        @-webkit-keyframes pulseWarning {
-            0% {
-                border-color: #f8d486
-            }
-
-            to {
-                border-color: #f8bb86
-            }
-        }
-
-        @keyframes pulseWarning {
-            0% {
-                border-color: #f8d486
-            }
-
-            to {
-                border-color: #f8bb86
-            }
-        }
-
-        .swal-icon--success {
-            border-color: #a5dc86
-        }
-
-        .swal-icon--success:after,
-        .swal-icon--success:before {
-            content: "";
-            border-radius: 50%;
-            position: absolute;
-            width: 60px;
-            height: 120px;
-            background: #fff;
-            -webkit-transform: rotate(45deg);
-            transform: rotate(45deg)
-        }
-
-        .swal-icon--success:before {
-            border-radius: 120px 0 0 120px;
-            top: -7px;
-            left: -33px;
-            -webkit-transform: rotate(-45deg);
-            transform: rotate(-45deg);
-            -webkit-transform-origin: 60px 60px;
-            transform-origin: 60px 60px
-        }
-
-        .swal-icon--success:after {
-            border-radius: 0 120px 120px 0;
-            top: -11px;
-            left: 30px;
-            -webkit-transform: rotate(-45deg);
-            transform: rotate(-45deg);
-            -webkit-transform-origin: 0 60px;
-            transform-origin: 0 60px;
-            -webkit-animation: rotatePlaceholder 4.25s ease-in;
-            animation: rotatePlaceholder 4.25s ease-in
-        }
-
-        .swal-icon--success__ring {
-            width: 80px;
-            height: 80px;
-            border: 4px solid hsla(98, 55%, 69%, .2);
-            border-radius: 50%;
-            box-sizing: content-box;
-            position: absolute;
-            left: -4px;
-            top: -4px;
-            z-index: 2
-        }
-
-        .swal-icon--success__hide-corners {
-            width: 5px;
-            height: 90px;
-            background-color: #fff;
-            padding: 1px;
-            position: absolute;
-            left: 28px;
-            top: 8px;
-            z-index: 1;
-            -webkit-transform: rotate(-45deg);
-            transform: rotate(-45deg)
-        }
-
-        .swal-icon--success__line {
-            height: 5px;
-            background-color: #a5dc86;
-            display: block;
-            border-radius: 2px;
-            position: absolute;
-            z-index: 2
-        }
-
-        .swal-icon--success__line--tip {
-            width: 25px;
-            left: 14px;
-            top: 46px;
-            -webkit-transform: rotate(45deg);
-            transform: rotate(45deg);
-            -webkit-animation: animateSuccessTip .75s;
-            animation: animateSuccessTip .75s
-        }
-
-        .swal-icon--success__line--long {
-            width: 47px;
-            right: 8px;
-            top: 38px;
-            -webkit-transform: rotate(-45deg);
-            transform: rotate(-45deg);
-            -webkit-animation: animateSuccessLong .75s;
-            animation: animateSuccessLong .75s
-        }
-
-        @-webkit-keyframes rotatePlaceholder {
-            0% {
-                -webkit-transform: rotate(-45deg);
-                transform: rotate(-45deg)
-            }
-
-            5% {
-                -webkit-transform: rotate(-45deg);
-                transform: rotate(-45deg)
-            }
-
-            12% {
-                -webkit-transform: rotate(-405deg);
-                transform: rotate(-405deg)
-            }
-
-            to {
-                -webkit-transform: rotate(-405deg);
-                transform: rotate(-405deg)
-            }
-        }
-
-        @keyframes rotatePlaceholder {
-            0% {
-                -webkit-transform: rotate(-45deg);
-                transform: rotate(-45deg)
-            }
-
-            5% {
-                -webkit-transform: rotate(-45deg);
-                transform: rotate(-45deg)
-            }
-
-            12% {
-                -webkit-transform: rotate(-405deg);
-                transform: rotate(-405deg)
-            }
-
-            to {
-                -webkit-transform: rotate(-405deg);
-                transform: rotate(-405deg)
-            }
-        }
-
-        @-webkit-keyframes animateSuccessTip {
-            0% {
-                width: 0;
-                left: 1px;
-                top: 19px
-            }
-
-            54% {
-                width: 0;
-                left: 1px;
-                top: 19px
-            }
-
-            70% {
-                width: 50px;
-                left: -8px;
-                top: 37px
-            }
-
-            84% {
-                width: 17px;
-                left: 21px;
-                top: 48px
-            }
-
-            to {
-                width: 25px;
-                left: 14px;
-                top: 45px
-            }
-        }
-
-        @keyframes animateSuccessTip {
-            0% {
-                width: 0;
-                left: 1px;
-                top: 19px
-            }
-
-            54% {
-                width: 0;
-                left: 1px;
-                top: 19px
-            }
-
-            70% {
-                width: 50px;
-                left: -8px;
-                top: 37px
-            }
-
-            84% {
-                width: 17px;
-                left: 21px;
-                top: 48px
-            }
-
-            to {
-                width: 25px;
-                left: 14px;
-                top: 45px
-            }
-        }
-
-        @-webkit-keyframes animateSuccessLong {
-            0% {
-                width: 0;
-                right: 46px;
-                top: 54px
-            }
-
-            65% {
-                width: 0;
-                right: 46px;
-                top: 54px
-            }
-
-            84% {
-                width: 55px;
-                right: 0;
-                top: 35px
-            }
-
-            to {
-                width: 47px;
-                right: 8px;
-                top: 38px
-            }
-        }
-
-        @keyframes animateSuccessLong {
-            0% {
-                width: 0;
-                right: 46px;
-                top: 54px
-            }
-
-            65% {
-                width: 0;
-                right: 46px;
-                top: 54px
-            }
-
-            84% {
-                width: 55px;
-                right: 0;
-                top: 35px
-            }
-
-            to {
-                width: 47px;
-                right: 8px;
-                top: 38px
-            }
-        }
-
-        .swal-icon--info {
-            border-color: #c9dae1
-        }
-
-        .swal-icon--info:before {
-            width: 5px;
-            height: 29px;
-            bottom: 17px;
-            border-radius: 2px;
-            margin-left: -2px
-        }
-
-        .swal-icon--info:after,
-        .swal-icon--info:before {
-            content: "";
-            position: absolute;
-            left: 50%;
-            background-color: #c9dae1
-        }
-
-        .swal-icon--info:after {
-            width: 7px;
-            height: 7px;
-            border-radius: 50%;
-            margin-left: -3px;
-            top: 19px
-        }
-
-        .swal-icon {
-            width: 80px;
-            height: 80px;
-            border-width: 4px;
-            border-style: solid;
-            border-radius: 50%;
-            padding: 0;
-            position: relative;
-            box-sizing: content-box;
-            margin: 20px auto
-        }
-
-        .swal-icon:first-child {
-            margin-top: 32px
-        }
-
-        .swal-icon--custom {
-            width: auto;
-            height: auto;
-            max-width: 100%;
-            border: none;
-            border-radius: 0
-        }
-
-        .swal-icon img {
-            max-width: 100%;
-            max-height: 100%
-        }
-
-        .swal-title {
-            color: rgba(0, 0, 0, .65);
-            font-weight: 600;
-            text-transform: none;
-            position: relative;
-            display: block;
-            padding: 13px 16px;
-            font-size: 27px;
-            line-height: normal;
-            text-align: center;
-            margin-bottom: 0
-        }
-
-        .swal-title:first-child {
-            margin-top: 26px
-        }
-
-        .swal-title:not(:first-child) {
-            padding-bottom: 0
-        }
-
-        .swal-title:not(:last-child) {
-            margin-bottom: 13px
-        }
-
-        .swal-text {
-            font-size: 16px;
-            position: relative;
-            float: none;
-            line-height: normal;
-            vertical-align: top;
-            text-align: left;
-            display: inline-block;
-            margin: 0;
-            padding: 0 10px;
-            font-weight: 400;
-            color: rgba(0, 0, 0, .64);
-            max-width: calc(100% - 20px);
-            overflow-wrap: break-word;
-            box-sizing: border-box
-        }
-
-        .swal-text:first-child {
-            margin-top: 45px
-        }
-
-        .swal-text:last-child {
-            margin-bottom: 45px
-        }
-
-        .swal-footer {
-            text-align: right;
-            padding-top: 13px;
-            margin-top: 13px;
-            padding: 13px 16px;
-            border-radius: inherit;
-            border-top-left-radius: 0;
-            border-top-right-radius: 0
-        }
-
-        .swal-button-container {
-            margin: 5px;
-            display: inline-block;
-            position: relative
-        }
-
-        .swal-button {
-            background-color: #7cd1f9;
-            color: #fff;
-            border: none;
-            box-shadow: none;
-            border-radius: 5px;
-            font-weight: 600;
-            font-size: 14px;
-            padding: 10px 24px;
-            margin: 0;
-            cursor: pointer
-        }
-
-        .swal-button:not([disabled]):hover {
-            background-color: #78cbf2
-        }
-
-        .swal-button:active {
-            background-color: #70bce0
-        }
-
-        .swal-button:focus {
-            outline: none;
-            box-shadow: 0 0 0 1px #fff, 0 0 0 3px rgba(43, 114, 165, .29)
-        }
-
-        .swal-button[disabled] {
-            opacity: .5;
-            cursor: default
-        }
-
-        .swal-button::-moz-focus-inner {
-            border: 0
-        }
-
-        .swal-button--cancel {
-            color: #555;
-            background-color: #efefef
-        }
-
-        .swal-button--cancel:not([disabled]):hover {
-            background-color: #e8e8e8
-        }
-
-        .swal-button--cancel:active {
-            background-color: #d7d7d7
-        }
-
-        .swal-button--cancel:focus {
-            box-shadow: 0 0 0 1px #fff, 0 0 0 3px rgba(116, 136, 150, .29)
-        }
-
-        .swal-button--danger {
-            background-color: #e64942
-        }
-
-        .swal-button--danger:not([disabled]):hover {
-            background-color: #df4740
-        }
-
-        .swal-button--danger:active {
-            background-color: #cf423b
-        }
-
-        .swal-button--danger:focus {
-            box-shadow: 0 0 0 1px #fff, 0 0 0 3px rgba(165, 43, 43, .29)
-        }
-
-        .swal-content {
-            padding: 0 20px;
-            margin-top: 20px;
-            font-size: medium
-        }
-
-        .swal-content:last-child {
-            margin-bottom: 20px
-        }
-
-        .swal-content__input,
-        .swal-content__textarea {
-            -webkit-appearance: none;
-            background-color: #fff;
-            border: none;
-            font-size: 14px;
-            display: block;
-            box-sizing: border-box;
-            width: 100%;
-            border: 1px solid rgba(0, 0, 0, .14);
-            padding: 10px 13px;
-            border-radius: 2px;
-            transition: border-color .2s
-        }
-
-        .swal-content__input:focus,
-        .swal-content__textarea:focus {
-            outline: none;
-            border-color: #6db8ff
-        }
-
-        .swal-content__textarea {
-            resize: vertical
-        }
-
-        .swal-button--loading {
-            color: transparent
-        }
-
-        .swal-button--loading~.swal-button__loader {
-            opacity: 1
-        }
-
-        .swal-button__loader {
-            position: absolute;
-            height: auto;
-            width: 43px;
-            z-index: 2;
-            left: 50%;
-            top: 50%;
-            -webkit-transform: translateX(-50%) translateY(-50%);
-            transform: translateX(-50%) translateY(-50%);
-            text-align: center;
-            pointer-events: none;
-            opacity: 0
-        }
-
-        .swal-button__loader div {
-            display: inline-block;
-            float: none;
-            vertical-align: baseline;
-            width: 9px;
-            height: 9px;
-            padding: 0;
-            border: none;
-            margin: 2px;
-            opacity: .4;
-            border-radius: 7px;
-            background-color: hsla(0, 0%, 100%, .9);
-            transition: background .2s;
-            -webkit-animation: swal-loading-anim 1s infinite;
-            animation: swal-loading-anim 1s infinite
-        }
-
-        .swal-button__loader div:nth-child(3n+2) {
-            -webkit-animation-delay: .15s;
-            animation-delay: .15s
-        }
-
-        .swal-button__loader div:nth-child(3n+3) {
-            -webkit-animation-delay: .3s;
-            animation-delay: .3s
-        }
-
-        @-webkit-keyframes swal-loading-anim {
-            0% {
-                opacity: .4
-            }
-
-            20% {
-                opacity: .4
-            }
-
-            50% {
-                opacity: 1
-            }
-
-            to {
-                opacity: .4
-            }
-        }
-
-        @keyframes swal-loading-anim {
-            0% {
-                opacity: .4
-            }
-
-            20% {
-                opacity: .4
-            }
-
-            50% {
-                opacity: 1
-            }
-
-            to {
-                opacity: .4
-            }
-        }
-
-        .swal-overlay {
-            position: fixed;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            text-align: center;
-            font-size: 0;
-            overflow-y: auto;
-            background-color: rgba(0, 0, 0, .4);
-            z-index: 10000;
-            pointer-events: none;
-            opacity: 0;
-            transition: opacity .3s
-        }
-
-        .swal-overlay:before {
-            content: " ";
-            display: inline-block;
-            vertical-align: middle;
-            height: 100%
-        }
-
-        .swal-overlay--show-modal {
-            opacity: 1;
-            pointer-events: auto
-        }
-
-        .swal-overlay--show-modal .swal-modal {
-            opacity: 1;
-            pointer-events: auto;
-            box-sizing: border-box;
-            -webkit-animation: showSweetAlert .3s;
-            animation: showSweetAlert .3s;
-            will-change: transform
-        }
-
-        .swal-modal {
-            width: 478px;
-            opacity: 0;
-            pointer-events: none;
-            background-color: #fff;
-            text-align: center;
-            border-radius: 5px;
-            position: static;
-            margin: 20px auto;
-            display: inline-block;
-            vertical-align: middle;
-            -webkit-transform: scale(1);
-            transform: scale(1);
-            -webkit-transform-origin: 50% 50%;
-            transform-origin: 50% 50%;
-            z-index: 10001;
-            transition: opacity .2s, -webkit-transform .3s;
-            transition: transform .3s, opacity .2s;
-            transition: transform .3s, opacity .2s, -webkit-transform .3s
-        }
-
-        @media (max-width:500px) {
-            .swal-modal {
-                width: calc(100% - 20px)
-            }
-        }
-
-        @-webkit-keyframes showSweetAlert {
-            0% {
-                -webkit-transform: scale(1);
-                transform: scale(1)
-            }
-
-            1% {
-                -webkit-transform: scale(.5);
-                transform: scale(.5)
-            }
-
-            45% {
-                -webkit-transform: scale(1.05);
-                transform: scale(1.05)
-            }
-
-            80% {
-                -webkit-transform: scale(.95);
-                transform: scale(.95)
-            }
-
-            to {
-                -webkit-transform: scale(1);
-                transform: scale(1)
-            }
-        }
-
-        @keyframes showSweetAlert {
-            0% {
-                -webkit-transform: scale(1);
-                transform: scale(1)
-            }
-
-            1% {
-                -webkit-transform: scale(.5);
-                transform: scale(.5)
-            }
-
-            45% {
-                -webkit-transform: scale(1.05);
-                transform: scale(1.05)
-            }
-
-            80% {
-                -webkit-transform: scale(.95);
-                transform: scale(.95)
-            }
-
-            to {
-                -webkit-transform: scale(1);
-                transform: scale(1)
-            }
-        }
-   
-        /*HEAD HOME*/
-        body {
-            overflow-x: hidden;
-        }
-
-        .centro_header_vehiculos {
-            max-width: 1070px;
-            margin: 0px auto;
-            position: relative;
-        }
-
-        .centro_header_vehiculos a {
-            display: inline-block;
-            position: relative;
-            max-width: 220px;
-            width: 100%;
-            text-align: center;
-            text-decoration: none;
-            border-bottom: 2px solid transparent;
-
-
-        }
-
-        .centro_header_vehiculos a {
-            transition: .2s;
-        }
-
-        .centro_header_vehiculos a:hover {
-            opacity: .8;
-        }
-
-        .centro_header_vehiculos a img {
-            display: block;
-        }
-
-        .titulo_vehiculo {
-            display: block;
-            width: 100%;
-            color: #30363a;
-            font-family: Raleway, sans-serif;
-            font-size: 16px;
-            font-weight: 500;
-            line-height: 18px;
-            border-bottom: 2px solid transparent;
-            padding-top: 5px;
-            padding-bottom: 5px;
-            transition: .2s;
-        }
-
-        .btn_next,
-        .btn_prev {
-            position: absolute;
-            top: 50%;
-            z-index: 1;
-            transform: translateY(-50%);
-            /* W3C */
-            -webkit-transform: translateY(-50%);
-            /* Safari & Chrome */
-            -moz-transform: translateY(-50%);
-            /* Firefox */
-            -ms-transform: translateY(-50%);
-            /* Internet Explorer */
-            -o-transform: translateY(-50%);
-            cursor: pointer;
-        }
-
-        .btn_next {
-            right: 10px;
-        }
-
-        .btn_prev {
-            left: 10px;
-        }
-
-        .character-slider__pagination {
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .slick-next {
-            display: none;
-        }
-
-        .pop2 {
-            background: #fff !important;
-            left: 0;
-            width: 100%;
-            transform: none;
-        }
-
-        .header__content {
-            height: auto;
-        }
-
-        .header__item {
-            position: initial;
-            text-transform: uppercase;
-        }
-
-        a.header__item {
-            padding: 2px;
-            padding-top: 20px;
-            padding-bottom: 20px;
-        }
-
-        .header_item2 {
-            color: #000 !important;
-        }
-
-        .header__content {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-direction: row;
-        }
-
-        .cont1_header {
-            display: flex;
-            flex-direction: row;
-            justify-content: space-evenly;
-            align-items: center;
-        }
-
-        .cta_up_header {
-            font-size: 14px;
-            color: #30363a;
-            font-weight: 600;
-            font-family: "Raleway";
-            background-color: #6dbce7;
-            /* padding: 10px 60px 10px 15px; */
-            padding: 10px 40px 10px 15px;
-            text-decoration: none;
-            background-position: right;
-            background-repeat: no-repeat;
-            background-size: inherit;
-            /* background-position-x: 96%; */
-            background-position-x: 90%;
-
-        }
-
-        .jc_div_carritos {
-            width: 90%;
-            max-width: 1100px;
-        }
-
-        .card_carritos {
-            width: 31.33%;
-            margin-left: 1%;
-            margin-right: 1%;
-            float: left;
-        }
-
-        .txt_card_car {
-            font-family: Raleway, sans-serif;
-            font-size: 14px;
-            font-weight: 700;
-            line-height: 18px;
-        }
-
-        .b24-widget-button-position-bottom-right {
-            bottom: 25px !important;
-        }
-
-        .whatsapp {
-            position: fixed;
-            inset: auto 52px 90px auto;
-            z-index: 10150;
-        }
-
-        .whatsapp img {
-            width: 60px;
-        }
-
-
-
-        @media (max-width: 1365px) {
-            /*.btn_next, .btn_prev {*/
-            /*    top: 18%;*/
-            /*}*/
-        }
-
-        /*@media only screen and (max-width: 818px) and (min-width: 768px){
-            .cont2_header{
-                display: none;
-            }
-        }*/
-
-        /* Nuevo estilo para menu */
-        .header__content {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .logo_menu {
-            max-width: 280px;
-            padding-top: 5px;
-        }
-
-        .btn_cotizar {
-            position: absolute;
-            right: 100px;
-        }
-
-        @media only screen and (max-width: 2000px) and (min-width: 1650px) {
-            .btn_cotizar {
-                right: 30px;
-            }
-        }
-
-        @media only screen and (max-width: 1649px) and (min-width: 1500px) {
-            .btn_cotizar {
-                right: 20px;
-            }
-        }
-
-        @media only screen and (max-width: 1499px) and (min-width: 1300px) {
-            .btn_cotizar {
-                right: 20px;
-            }
-
-            .header__content {
-                max-width: 1000px;
-            }
-        }
-
-        @media only screen and (max-width: 1299px) and (min-width: 1200px) {
-            .btn_cotizar {
-                right: 15px;
-            }
-
-            .header__content {
-                max-width: 930px;
-            }
-        }
-
-        @media only screen and (max-width: 1200px) and (min-width: 992px) {
-            .btn_cotizar {
-                position: static;
-            }
-
-            .header__content {
-                max-width: none;
-                margin: 0 -20px;
-            }
-        }
-
-        @media only screen and (max-width: 1175px) and (min-width: 992px) {
-            .header__item {
-                font-size: 12px;
-            }
-        }
-
-        @media only screen and (max-width: 1100px) and (min-width: 992px) {
-            .logo_menu {
-                max-width: 200px;
-                padding-top: 6px;
-            }
-        }
-
-        @media screen and (max-width: 991px) {
-            #js-header {
-                padding: 17px 16px !important;
-                position: static !important;
-            }
-
-            .header__button {
-                display: block;
-            }
-
-            .cont1_header.right_menu {
-                display: none;
-            }
-
-            .cont1_header {
-                width: 100%;
-            }
-
-            .header__item {
-                display: none;
-            }
-
-            .cont2_header {
-                display: none;
-            }
-
-            .header__content {
-                margin: 0;
-            }
-
-            .cont1_header {
-                justify-content: left;
-            }
-
-            .menu.open {
-                height: 100%;
-                top: 0;
-                padding-top: 60px;
-                background-color: #ffffffe6 !important;
-            }
-
-            .centro_header_vehiculos a {
-                max-width: none;
-                width: 31.33%;
-                margin-left: 0.5%;
-                margin-right: 0.5%;
-            }
-
-            .centro_header_vehiculos a img {
-                margin-left: auto;
-                margin-right: auto;
-            }
-        }
-
-        @media (max-width: 767px) {
-            .centro_header_vehiculos a {
-                margin-left: 0%;
-                margin-right: 0%;
-            }
-        }
-
-        /* Nuevo estilo para menu */
-
-        @media (max-width: 767px) {
-            .character-slider__pagination {
-                display: none;
-            }
-
-            .menu.open {
-                /*background: rgba(0, 0, 0, 0.85) !important;*/
-                height: 100%;
-                top: 0;
-                padding-top: 60px;
-                background-color: #ffffffe6 !important;
-            }
-
-            .menu__item {
-                color: #30363a !important;
-                font-weight: 500;
-            }
-
-            .cont1_header {
-                width: 100%;
-            }
-
-            .cont2_header {
-                display: none;
-            }
-
-            .menu {
-                top: 55px;
-            }
-
-            .header {
-                position: fixed !important;
-                width: 100% !important;
-            }
-
-            #js-header {
-                padding: 15px 16px !important;
-                position: static !important;
-            }
-
-            .centro_header_vehiculos {
-                padding-top: 15px;
-                padding-left: 10px;
-                padding-right: 10px;
-                padding-bottom: 15px;
-                /*background-color: #fff;*/
-                width: 100%;
-                margin-bottom: 10px;
-            }
-
-            .centro_header_vehiculos a {
-                max-width: 50%;
-                float: left;
-                width: 100%;
-            }
-
-            .centro_header_vehiculos a img {
-                margin-left: auto;
-                margin-right: auto;
-                max-width: 175px;
-            }
-
-            .titulo_vehiculo {
-                /*color: #fff;*/
-                padding-top: 10px;
-            }
-        }
-
-        @media (max-width: 935px) {
-            .header__item {
-                font-size: 13px;
-            }
-
-            a.header__item {
-                padding-left: 0px;
-                padding-right: 0px;
-            }
-
-            .cta_up_header {
-                font-size: 12px;
-            }
-
-        }
-
-
-        @media (max-width: 479px) {
-            /*.btn_next, .btn_prev {*/
-            /*    top: 15%;*/
-            /*}*/
-            /*.btn_prev {*/
-            /*    left: 0px;*/
-            /*}*/
-            /*.btn_next {*/
-            /*    right: 0px;*/
-            /*}*/
-
-            .centro_header_vehiculos {
-                max-height: 325px;
-                overflow: auto;
-            }
-
-            .centro_header_vehiculos a img {
-                width: 100%;
-            }
-
-            .footer__center {
-                flex-wrap: wrap;
-            }
-
-            .footer__socials {
-                width: 100%;
-                justify-content: left;
-                padding-top: 10px;
-            }
-        }
-
-        /*MAIN STYLE*/
-
-        .b24-window-mounts #b24-window-mount-b24-site-button-form-592,
-        .b24-form #b24-b24-site-button-form-592,
-        .b24-form #b24-b24-site-button-form-592.b24-form-dark {
-            --b24-font-family: Raleway, var(--b24-font-family-default);
-            --b24-primary-color: rgba(0, 0, 0, 1);
-            --b24-primary-text-color: rgba(255, 255, 255, 1);
-            --b24-text-color: rgba(0, 0, 0, 1);
-            --b24-background-color: rgba(255, 255, 255, 1);
-            --b24-field-border-color: rgba(0, 0, 0, 0.04);
-            --b24-field-background-color: rgba(0, 0, 0, 0.04);
-            --b24-field-focus-background-color: rgba(255, 255, 255, 1);
-            --b24-popup-background-color: rgba(255, 255, 255, 1);
-            --b24-primary-hover-color: rgba(0, 0, 0, 0.7);
-        }
-  
-        @media (max-width: 1024px) {
-            .button_jaecoo_7 {
-                top: 0px !important;
-            }
-
-        }
-
-        .header-oj {
-            min-height: 60px;
-        }
-
-        .button--white {
-            opacity: 1;
-        }
-
-        .header-oj {
-            min-height: 56px;
-        }
-    
-        .b24-window-mounts #b24-window-mount-b24-site-button-form-592,
-        .b24-form #b24-b24-site-button-form-592,
-        .b24-form #b24-b24-site-button-form-592.b24-form-dark {
-            --b24-font-family: Raleway, var(--b24-font-family-default);
-            --b24-primary-color: rgba(0, 0, 0, 1);
-            --b24-primary-text-color: rgba(255, 255, 255, 1);
-            --b24-text-color: rgba(0, 0, 0, 1);
-            --b24-background-color: rgba(255, 255, 255, 1);
-            --b24-field-border-color: rgba(0, 0, 0, 0.04);
-            --b24-field-background-color: rgba(0, 0, 0, 0.04);
-            --b24-field-focus-background-color: rgba(255, 255, 255, 1);
-            --b24-popup-background-color: rgba(255, 255, 255, 1);
-            --b24-primary-hover-color: rgba(0, 0, 0, 0.7);
-        }
-  
-        @media (max-width: 1024px) {
-            .button_jaecoo_7 {
-                top: 0px !important;
-            }
-
-        }
-
-        .header-oj {
-            min-height: 60px;
-        }
-
-        .button--white {
-            opacity: 1;
-        }
-
-        .header-oj {
-            min-height: 56px;
-        }
-    </style>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <script is:inline src="/index_files/tag_phono.js" ></script>
-
-   
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Omoda | Jaecoo C7</title>
-    <meta property="og:title" content="Omoda | Jaecoo C7">
-
-    <meta name="description" content="Maneja como lo imaginaste">
-
-
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="Omoda">
-
-    <meta property="og:description" content="Maneja como lo imaginaste">
-
-
-    <link href="https://omodajaecoo.com.pa/favicon.ico" type="image/x-icon" rel="icon">
-    <link href="https://omodajaecoo.com.pa/favicon.ico" type="image/x-icon" rel="shortcut icon">
-    <link rel="stylesheet" href="./index_files/vendor.css">
-    <link rel="stylesheet" href="./index_files/main-v2.css">
-    <link rel="stylesheet" href="./index_files/omoda.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com/">
-    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
- 
-    <link type="text/css" rel="stylesheet" href="./index_files/app.bundle.min.css">
-    <script type="text/javascript" src="./index_files/app.bundle.min.js"></script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
-        integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-
-    <script is:inline src="/index_files/util.js"></script>
-    <script is:inline src="/index_files/index.js"></script>
-
-    <script type="text/javascript">
-        const mainURL = 'https://omodajaecoo.com.pa/';
-    </script>
-   
-
-    <script is:inline src="/index_files/api.js" async="" defer=""></script>
-
-    <script is:inline src="/index_files/app.js"></script>
-
-    <script  is:inline src="/index_files/api.js"></script>
-   
-
-</head>
-
-<body>
-
-
- <script src="../cookies/cookie-manager.js" 
-            data-css-path="../cookies/cookieconsent.css"
-            data-config-path="../cookies/cookieconsent-config.js">
-    </script>
-
-  <!-- Google Tag Manager (noscript) -->
-
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KZ7C5J9K" height="0" width="0"
-            style="display:none;visibility:hidden"></iframe></noscript>
-
-    <!-- End Google Tag Manager (noscript) -->
-    <!-- Header Nuevo -->
-
-    <!-- Final Header Nuevo -->
-
-    <header-oj class="header-oj"></header-oj>
-    <header id="js-header" class="header content--only-lateral" style="display: none;">
-        <div class="header__content">
-            <div class="cont1_header">
-                <div class="pop pop2">
-                    <div class="centro_header_vehiculos">
-                    </div>
-                </div>
-            </div>
-            <button class="header__button js-menu-trigger">
-            </button>
+---
+// src/pages/modelos/c7.astro
+import Layout from "../layouts/default.astro";
+
+const pageTitle = "Omoda C7 | Maneja como lo imaginaste";
+const pageDescription = "Tecnología moderna, diseño práctico y el confort que tu vida exige. Descubre el Omoda C7 con motor 1.6 Turbo, 183 Hp y sistemas ADAS.";
+const pageKeywords = "Omoda C7, SUV, 1.6 Turbo, Panamá, ADAS, tecnología";
+const canonical = "https://www.omodajaecoo.com.pa/modelos/c7";
+const ogImage = "https://www.omodajaecoo.com.pa/img/og-c7.png";
+
+const headStyles = [
+  { href: "/src/styles/c7/vendor.css" },
+  { href: "/src/styles/c7/main-v2.css" },
+  { href: "/src/styles/c7/omoda.css" },
+  { href: "/src/styles/c7/c7-custom.css" },
+];
+
+const headScripts = [
+  { 
+    src: "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js",
+    attributes: {
+      integrity: "sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==",
+      crossorigin: "anonymous",
+      referrerpolicy: "no-referrer"
+    }
+  },
+  { src: "/src/scripts/c7/app.bundle.min.js" },
+  { src: "/src/scripts/c7/vendor.js" },
+  { src: "/src/scripts/c7/main.js" },
+];
+
+const inlineScripts = [
+  `const mainURL = 'https://omodajaecoo.com.pa/';`,
+  // Los scripts de util.js se moverán a archivos externos
+];
+
+// Datos de las características técnicas
+const stats = {
+  motor: "1.6 Turbo",
+  traccion: "4x2",
+  potencia: "183 Hp",
+  torque: "275 Nm"
+};
+
+// Datos del slider exterior
+const exteriorSlides = [
+  {
+    title: "Parrilla en forma de X",
+    text: "",
+    image: "/img/c7/font.png",
+    imageMobile: "https://omodajaecoo.com.pa/backstage/files/sliders/image_mobile/bbcb9e20-2a9a-41bb-8254-1989de502376/Screenshot%202025-08-22%20at%202.34.12%E2%80%AFPM.png",
+    colorClass: "slide-color-light"
+  },
+  {
+    title: "Luces Hyper Red en forma de 7's",
+    text: "",
+    image: "/img/c7/luces.png",
+    imageMobile: "https://omodajaecoo.com.pa/backstage/files/sliders/image_mobile/cf7976b1-c72b-4fbb-85aa-b4f2e0f6f491/Screenshot%202025-08-22%20at%203.52.13%E2%80%AFPM.png",
+    colorClass: "slide-color-light"
+  }
+];
+
+// Datos del slider interior
+const interiorSlides = [
+  {
+    title: "Interior tecnológico y espacioso",
+    text: "¡Pantalla de 15.6\", luz ambiental, ventilación de asientos, carga inalámbrica del celular, y más!",
+    image: "/img/c7/interior.png",
+    imageMobile: "/img/c7/interior.png"
+  },
+  {
+    title: "Un descanso cuando lo necesitas",
+    text: "Los asientos del C7 se reclinan de manera automática hasta 180°, permitiéndote desconectarte por un momento. Con su temporizador integrado, puedes relajarte con tranquilidad sin perder la noción del tiempo.",
+    image: "/img/c7/omoda-c7-interno-negro-2646x1476.jpg",
+    imageMobile: "/img/c7/omoda-c7-interno-negro-2646x1476.jpg"
+  }
+];
+
+// Datos de sistemas ADAS
+const adasFeatures = [
+  {
+    title: "IES - Dirección de Emergencia Inteligente",
+    text: "Ayuda al conductor a maniobrar de forma segura en situaciones de emergencia, aplicando asistencia en la dirección para evitar obstáculos o colisiones.",
+    image: "/img/c7/ies.png"
+  },
+  {
+    title: "ACC - Control Crucero Adaptativo",
+    text: "Mantiene automáticamente una velocidad constante y regula la distancia con el vehículo de adelante, frenando o acelerando según el tráfico.",
+    image: "/img/c7/acc.png"
+  },
+  {
+    title: "AEB - Frenado Automático de Emergencia",
+    text: "Detecta riesgos de colisión y aplica los frenos de manera automática si el conductor no reacciona a tiempo.",
+    image: "/img/c7/aeb.png"
+  },
+  {
+    title: "LCC - Control de Centrado en el Carril",
+    text: "Mantiene al vehículo en el centro del carril, corrigiendo suavemente la dirección cuando detecta desvíos.",
+    image: "/img/c7/lcc.png"
+  },
+  {
+    title: "TJA - Asistencia en Tráfico Pesado",
+    text: "Combina ACC y LCC para manejar de forma semiautónoma en embotellamientos: mantiene distancia, velocidad baja y el vehículo centrado en el carril.",
+    image: "/img/c7/tja.png"
+  }
+];
+6
+// Datos de colores
+const colores = [
+  { id: "verde-oscuro", nombre: "Verde Oscuro", imagen: "/img/c7/Verde.jpeg", color: "#1a5556" },
+  { id: "gris-acerado", nombre: "Gris Acerado", imagen: "/img/c7/Gris_claro.Jpg", color: "#6e797b" },
+  { id: "gris-oscuro", nombre: "Gris Mate", imagen: "/img/c7/Girs.jpeg", color: "#2b333e", activo: true },
+  { id: "blanco", nombre: "Blanco", imagen: "/img/c7/Blanco.jpeg", color: "#ffffff" },
+  { id: "negro", nombre: "Negro", imagen: "/img/c7/Negro.jpeg", color: "#000000" }
+];
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  keywords={pageKeywords}
+  canonical={canonical}
+  ogImage={ogImage}
+  ogTitle={pageTitle}
+  ogDescription={pageDescription}
+  headStyles={headStyles}
+  headScripts={headScripts}
+>
+
+  <main class="main">
+    <!-- Hero Banner -->
+    <div class="promo">
+      <picture class="promo__image-wrapper promo__image-wrapper-desktop move-out animation-activated">
+        <source media="(orientation: portrait)" srcset="/img/c7/BM - C7.png 768w">
+        <source srcset="">
+        <img class="promo__image" src="/img/c7/BP - C7.png" alt="Omoda C7">
+      </picture>
+      <div class="promo__content-wrapper datos_banner">
+        <div>
+          <div class="txt_combustible">Nuevo <span>Omoda</span><br></div>
+          <img class="logo_banner" src="/img/c7/LOGOS_C7.png" alt="C7">
         </div>
-    </header>
-    <!-- menu movil -->
-    <div class="menu js-menu" style="display: none;">
+        <div class="dos_columnas_banner"></div>
+      </div>
+      <div class="promo__content-wrapper">
+        <div style="display: flex;">
+          <a href="/ficha_tecnica/c7.pdf"
+            class="button promo__button promo__button--light observer-word-up animation-activated"
+            style="text-decoration: none;">FICHA TÉCNICA</a>
+          <a href="https://cotizar.omodajaecoo.com.pa"
+            class="button promo__button promo__button--light observer-word-up animation-activated"
+            style="text-decoration: none; margin-left: 5px;">COTIZAR</a>
+        </div>
+      </div>
     </div>
 
-
-    <main class="main">
-        <!-- Fecha 29 dec Version 2  -->
-        <style>
-            .stats__title {
-                font-size: 58px;
-            }
-
-            .model__tech .title-text {
-                background-color: #f4f5f5;
-            }
-
-            .character-slider__content {
-                top: 160px;
-            }
-
-            .character-slider__pagination {
-                /* bottom: 200px; */
-                bottom: 60px;
-            }
-
-            .jc_cambio_color_blan,
-            .jc_cambio_color_blan3 {
-                background-color: #fff !important;
-            }
-
-            .jc_more_padding {
-                padding-top: 40px;
-            }
-
-            .jc_txt1_cambio {
-                color: #30363a !important;
-                font-weight: 400 !important;
-            }
-
-            .jc_txt2_cambio {
-                padding-top: 20px !important;
-                color: #33393d !important;
-                font-weight: 500 !important;
-            }
-
-            .jc_cambio_color_blan4,
-            .jc_cambio_color_blan5,
-            .jc_txt_blan6 {
-                color: #fff !important;
-            }
-
-            .character-slider__pagination2 {
-                color: #fff !important;
-                height: 2px;
-            }
-
-            .jc_cambio_col_dark {
-                background-color: #31363a !important;
-            }
-
-            .jc_tab_numbers {
-                display: flex;
-                justify-content: center;
-                padding-bottom: 0px;
-                flex-wrap: wrap;
-            }
-
-            .jc_cta_tab {
-                font-size: 18px;
-                line-height: 50px;
-                color: #6f8590;
-                font-weight: 500;
-
-                padding-left: 20px;
-                padding-right: 20px;
-                padding-bottom: 10px;
-                text-decoration: none;
-                cursor: pointer;
-                border: none;
-                background-color: transparent;
-                transition: .2s;
-            }
-
-            .tab_activo_jc {
-                text-transform: uppercase;
-                color: #30363a;
-                text-decoration: underline;
-            }
-
-            .slider_button_active {
-                color: #30363a;
-                text-decoration: underline;
-            }
-
-            .full-bg__img img {
-                object-fit: contain !important;
-            }
-
-            .btn1_jc {
-                display: inline-block;
-                font-size: 14px;
-                line-height: 27px;
-                color: #30363a;
-                font-weight: 500;
-                font-family: "Avenir";
-                text-align: center;
-                border: 1px solid #30363a;
-                padding: 15px 30px 15px 30px;
-                margin-top: 20px;
-                text-decoration: none;
-            }
-
-            .container {
-                max-width: 1140px;
-                margin-left: auto;
-                margin-right: auto;
-                padding-left: 15px;
-                padding-right: 15px;
-            }
-
-            .c-iframe-colores {
-                width: 100%;
-                height: 100%;
-                position: relative;
-                overflow: hidden;
-                aspect-ratio: 16/9;
-            }
-
-            .c-iframe-colores iframe {
-                width: 100%;
-                height: 100%;
-                border: none;
-                position: absolute;
-                top: 0;
-                left: 0;
-            }
-
-            .datos_banner {
-                right: auto;
-                left: 120px;
-                align-items: start;
-                bottom: 69px;
-            }
-
-            .logo_banner {
-                width: 150px;
-            }
-
-            .dos_columnas_banner {
-                display: flex;
-                align-items: center;
-            }
-
-            .col_1_pr_mt {
-                padding-right: 50px;
-            }
-
-            .col_2_pr_mt {
-                padding-left: 30px;
-            }
-
-            .txt_precio_desde {
-                font-size: 12px;
-                font-family: Avenir, sans-serif;
-            }
-
-            .precio_desde {
-                font-size: 48px;
-                line-height: 58px;
-                font-weight: bold;
-                font-family: Avenir, sans-serif;
-            }
-
-            .txt_combustible {
-                font-size: 22px;
-                line-height: 25px;
-                letter-spacing: 1px;
-                font-weight: bold;
-                font-family: Avenir, sans-serif;
-            }
-
-            .txt_motor {
-                font-size: 20px;
-                line-height: 20px;
-                letter-spacing: 1px;
-                font-family: Avenir, sans-serif;
-            }
-
-            @media (max-width: 1199px) {
-
-                .character-slider__content {
-                    top: 0px !important;
-                }
-
-                .character-slider__pagination {
-                    position: initial !important;
-                    bottom: 0px !important;
-                }
-            }
-
-            @media (min-width: 1199px) {
-                .character-slider__content_control {
-                    top: 255px;
-                }
-
-                .character-slider__pagination3 {
-                    bottom: 110px;
-                }
-            }
-
-            @media (max-width: 767px) {
-                .centro_header_vehiculos a {
-                    max-width: 50%;
-                    float: left;
-                    width: 100%;
-                }
-
-                .centro_header_vehiculos a img {
-                    margin-left: auto;
-                    margin-right: auto;
-                }
-
-                .container {
-                    padding-left: 0;
-                    padding-right: 0;
-                }
-            }
-
-
-            @media (max-width: 767px) {
-                .character-slider__pagination2 {
-                    color: #fff !important;
-                }
-            }
-
-            .model__tech,
-            .model__tech .title-text,
-            .model__features,
-            .model__features--white .title-text,
-            .model__features .feature-block,
-            .brand-page .content,
-            .brand-page {
-                background-color: #f4f5f5;
-            }
-
-            @media (max-width: 579px) {
-                .jc_cta_tab {
-                    padding: 0px 8px 0px 8px;
-                    font-size: 14px;
-                }
-            }
-
-            @media (max-width: 380px) {
-                /*.jc_cta_tab{*/
-                /*    padding: 0px 2px 0px 2px;*/
-                /*    font-size: 12px;*/
-                /*}*/
-            }
-        </style>
-        <div class="promo ">
-            <picture class="promo__image-wrapper promo__image-wrapper-desktop move-out animation-activated">
-                <source media="(orientation: portrait)" srcset="./index_files/BM - C7.png 768w, ">
-                <source srcset="">
-                <img class="promo__image" src="./index_files/BP - C7.png" alt="C7">
-            </picture>
-            <div class="promo__content-wrapper datos_banner">
-                <div>
-                    <div class="txt_combustible">Nuevo <span>Omoda</span><br></div>
-                    <img class="logo_banner" src="./index_files/LOGOS_C7.png" alt="">
-                </div>
-                <div class="dos_columnas_banner">
-                    <!-- <div class="col_1_pr_mt">
-                    <div class="txt_precio_desde">precio desde</div>
-                    <div class="precio_desde">$35,990*</div>
-                </div> -->
-                    <!-- <div class="col_2_pr_mt">
-                    <div class="txt_combustible">Motor <span>Gasolina</span></div>
-                    <div class="txt_motor">1.6 L Turbo</div>
-                </div> -->
-                </div>
-                <!-- <h1 class="promo__title observer-word-up" style="color: #fff;">C7 </h1> -->
-            </div>
-            <div class="promo__content-wrapper">
-                <div style="display: flex;">
-                    <a href="https://omodajaecoo.com.pa/ficha_tecnica/c7.pdf"
-                        class="button promo__button promo__button--light observer-word-up animation-activated"
-                        style="text-decoration: none;">FICHA TÉCNICA</a>
-                    <a href="https://cotizar.omodajaecoo.com.pa"
-                        class="button promo__button promo__button--light observer-word-up animation-activated"
-                        style="text-decoration: none; margin-left: 5px;">COTIZAR</a>
-                </div>
-            </div>
+    <!-- Stats Section -->
+    <div class="stats content">
+      <div class="stats__header">
+        <div class="stats__title">Donde la innovación cobra sentido</div>
+        <div class="stats__text observer-fade-in animation-activated">
+          Tecnología moderna, diseño práctico y el confort que tu vida exige.
         </div>
-        <div class="stats content">
-            <div class="stats__header">
-                <div class="stats__title">
-                    Donde la innovación cobra sentido </div>
-                <div class="stats__text observer-fade-in animation-activated">
-                    Tecnología moderna, diseño práctico y el confort que tu vida exige.​ </div>
-            </div>
-            <div class="jc_tab_numbers">
-                <!-- <button id="luxury" class="jc_cta_tab tab_button tab_activo_jc">LUXURY</button>
-                                <button id="premium" class="jc_cta_tab tab_button ">PREMIUM</button> -->
-            </div>
-            <div id="content_tab_luxury" class="stats__numbers">
-                <div class="stats__number">
-                    <p class="stats__number-name">MOTOR</p>
-                    <p class="js-value-counter stats__number-value">1.6 Turbo</p>
-                </div>
-                <div class="stats__number">
-                    <p class="stats__number-name">TRACCIÓN</p>
-                    <p class="js-value-counter stats__number-value">4x2</p>
-                </div>
-                <div class="stats__number">
-                    <p class="stats__number-name">POTENCIA</p>
-                    <p class="js-value-counter stats__number-value">183 Hp</p>
-                </div>
-                <div class="stats__number">
-                    <p class="stats__number-name">TORQUE</p>
-                    <p class="js-value-counter stats__number-value">275 Nm</p>
-                </div>
-            </div>
-            <div id="content_tab_premium" class="stats__numbers" style="display:none;">
-                <div class="stats__number">
-                    <p class="stats__number-name">MOTOR</p>
-                    <p class="js-value-counter stats__number-value">1.6 Turbo</p>
-                </div>
-                <div class="stats__number">
-                    <p class="stats__number-name">TRACCIÓN</p>
-                    <p class="js-value-counter stats__number-value">4x4</p>
-                </div>
-                <div class="stats__number">
-                    <p class="stats__number-name">POTENCIA</p>
-                    <p class="js-value-counter stats__number-value">183 Hp</p>
-                </div>
-                <div class="stats__number">
-                    <p class="stats__number-name">TORQUE</p>
-                    <p class="js-value-counter stats__number-value">275 Nm</p>
-                </div>
-            </div>
+      </div>
+      <div class="jc_tab_numbers"></div>
+      <div id="content_tab_luxury" class="stats__numbers">
+        <div class="stats__number">
+          <p class="stats__number-name">MOTOR</p>
+          <p class="js-value-counter stats__number-value">{stats.motor}</p>
         </div>
-
-
-
-
-
-
-
-
-
-
-
-
-        <div class="model__tech">
-            <div class="content title-text">
-                <div
-                    class="title-text__content-wrapper title-text--with-title title-text--no-subtitle title-text--only-one-text">
-                    <h3 class="title-text__title observer-fade-in animation-activated">EQUIPAMIENTO EXTERIOR</h3>
-                    <p class="title-text__text observer-fade-in animation-activated">Parrilla frontal en “X”, un diseño
-                        exterior de líneas definidas y luces Hyper Red en forma de 7: cada elemento exterior está
-                        diseñado para aportar visibilidad, seguridad y una identidad única en la carretera.</p>
-                </div>
-            </div>
-            <div class="character-slider-container content--only-lateral">
-                <div
-                    class="character-slider swiper js-slider-character swiper-initialized swiper-horizontal swiper-pointer-events swiper-backface-hidden">
-                    <div class="character-slider__container swiper-wrapper" id="swiper-wrapper-eb9c710ae0169c60a"
-                        aria-live="polite" style="transform: translate3d(0px, 0px, 0px);">
-                        <div class="character-slider__item swiper-slide swiper-slide-next" role="group"
-                            aria-label="2 / 3" style="width: 1220px; margin-right: 40px;">
-                            <div class="character-slider__image">
-                                <picture class="">
-                                    <source media="(max-width: 767px)"
-                                        srcset="https://omodajaecoo.com.pa/backstage/files/sliders/image_mobile/bbcb9e20-2a9a-41bb-8254-1989de502376/Screenshot 2025-08-22 at 2.34.12 PM.png 768w,  ">
-
-                                    <source srcset="">
-                                    <img class="" src="./index_files/font.png" alt="">
-                                </picture>
-                            </div>
-                            <div class="character-slider__content">
-                                <style>
-                                    @media (min-width: 1200px) {
-                                        .slide-color-245 {
-                                            color: #ffffff;
-                                        }
-                                    }
-                                </style>
-                                <p class="character-slider__title slide-color-245">Parrilla en forma de X</p>
-                                <p class="character-slider__text slide-color-245"></p>
-                            </div>
-                        </div>
-                        <div class="character-slider__item swiper-slide" role="group" aria-label="3 / 3"
-                            style="width: 1220px; margin-right: 40px;">
-                            <div class="character-slider__image">
-                                <picture class="">
-                                    <source media="(max-width: 767px)"
-                                        srcset="https://omodajaecoo.com.pa/backstage/files/sliders/image_mobile/cf7976b1-c72b-4fbb-85aa-b4f2e0f6f491/Screenshot 2025-08-22 at 3.52.13 PM.png 768w,  ">
-
-                                    <source srcset="">
-                                    <img class="" src="./index_files/luces.png" alt="">
-                                </picture>
-                            </div>
-                            <div class="character-slider__content">
-                                <style>
-                                    @media (min-width: 1200px) {
-                                        .slide-color-246 {
-                                            color: #ffffff;
-                                        }
-                                    }
-                                </style>
-                                <p class="character-slider__title slide-color-246">Luces Hyper Red en forma de 7's</p>
-                                <p class="character-slider__text slide-color-246"> </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div
-                        class="js-slider-character-pagination character-slider__pagination swiper-pagination-clickable swiper-pagination-bullets swiper-pagination-horizontal">
-                        <span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0"
-                            role="button" aria-label="Go to slide 1" aria-current="true"></span><span
-                            class="swiper-pagination-bullet" tabindex="0" role="button"
-                            aria-label="Go to slide 2"></span><span class="swiper-pagination-bullet" tabindex="0"
-                            role="button" aria-label="Go to slide 3"></span>
-                    </div>
-                    <div class="js-slider-character-navigation character-slider__navigation"></div>
-                    <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
-                </div>
-            </div>
+        <div class="stats__number">
+          <p class="stats__number-name">TRACCIÓN</p>
+          <p class="js-value-counter stats__number-value">{stats.traccion}</p>
         </div>
-
-
-
-        <div class="model__tech jc_cambio_color_blan3">
-            <div class="content title-text jc_cambio_color_blan3">
-                <div
-                    class="title-text__content-wrapper title-text--with-title title-text--no-subtitle title-text--only-one-text">
-                    <h3 class="title-text__title jc_txt1_cambio observer-fade-in animation-activated">EQUIPAMIENTO
-                        INTERIOR</h3>
-                    <p class="title-text__text jc_txt2_cambio observer-fade-in animation-activated">Interior cómodo,
-                        silencioso y funcional, pensado para ofrecer bienestar en cada viaje.​</p>
-                </div>
-            </div>
-            <div class="character-slider-container content--only-lateral">
-                <div
-                    class="character-slider swiper js-slider-character swiper-initialized swiper-horizontal swiper-pointer-events swiper-backface-hidden">
-                    <div class="character-slider__container swiper-wrapper" id="swiper-wrapper-eb9c710ae0169c60a"
-                        aria-live="polite" style="transform: translate3d(0px, 0px, 0px);">
-                        <div class="character-slider__item swiper-slide swiper-slide-next" role="group"
-                            aria-label="2 / 3" style="width: 1220px; margin-right: 40px;">
-                            <div class="character-slider__image">
-                                <picture class="">
-                                    <source media="(max-width: 767px)" srcset="./index_files/interior.png">
-
-                                    <source srcset="">
-                                    <img class="" src="./index_files/interior.png" alt="">
-                                </picture>
-                            </div>
-                            <div class="character-slider__content">
-                                <style>
-                                    @media (min-width: 1200px) {
-                                        .slide-color-245 {
-                                            color: #ffffff;
-                                        }
-                                    }
-                                </style>
-                                <p class="character-slider__title slide-color-245">Interior tecnológico y espacioso</p>
-                                <p class="character-slider__text slide-color-245">¡Pantalla de 15.6", luz ambiental,
-                                    ventilación de
-                                    asientos, carga inalámbrica del celular, y más!</p>
-
-
-                            </div>
-                        </div>
-                        <div class="character-slider__item swiper-slide" role="group" aria-label="3 / 3"
-                            style="width: 1220px; margin-right: 40px;">
-                            <div class="character-slider__image">
-                                <picture class="">
-                                    <source media="(max-width: 767px)"
-                                        srcset="./index_files/omoda-c7-interno-negro-2646x1476.jpg">
-
-                                    <source srcset="">
-                                    <img class="" src="./index_files/omoda-c7-interno-negro-2646x1476.jpg" alt="">
-                                </picture>
-                            </div>
-                            <div class="character-slider__content">
-                                <style>
-                                    @media (min-width: 1200px) {
-                                        .slide-color-246 {
-                                            color: #ffffff;
-                                        }
-                                    }
-                                </style>
-                                <p class="character-slider__title slide-color-246">Un descanso cuando lo necesitas</p>
-                                <p class="character-slider__text slide-color-246"> Los asientos del C7 se reclinan de
-                                    manera automática hasta 180°, permitiéndote desconectarte por un momento. Con su
-                                    temporizador integrado, puedes relajarte con tranquilidad sin perder la noción del
-                                    tiempo.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div
-                        class="js-slider-character-pagination character-slider__pagination swiper-pagination-clickable swiper-pagination-bullets swiper-pagination-horizontal">
-                        <span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0"
-                            role="button" aria-label="Go to slide 1" aria-current="true"></span><span
-                            class="swiper-pagination-bullet" tabindex="0" role="button"
-                            aria-label="Go to slide 2"></span><span class="swiper-pagination-bullet" tabindex="0"
-                            role="button" aria-label="Go to slide 3"></span>
-                    </div>
-                    <div class="js-slider-character-navigation character-slider__navigation"></div>
-                    <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
-                </div>
-            </div>
+        <div class="stats__number">
+          <p class="stats__number-name">POTENCIA</p>
+          <p class="js-value-counter stats__number-value">{stats.potencia}</p>
         </div>
-
-
-
-
-
-
-
-        <div class="model__tech jc_cambio_col_dark" style="display: none;">
-            <div class="content title-text jc_cambio_col_dark">
-                <div
-                    class="title-text__content-wrapper title-text--with-title title-text--no-subtitle title-text--only-one-text">
-                    <h3 class="title-text__title jc_txt_blan6 observer-fade-in animation-activated">TECNOLOGÍAS
-                        INTELIGENTES</h3>
-                    <p class="title-text__text jc_txt_blan6 observer-fade-in animation-activated">Una experiencia de
-                        conducción única con pantalla deslizante Star-Track de 15.6”, extensor de piernas eléctrico para
-                        el pasajero, control por voz, fragancia integrada en el aire acondicionado, asientos ventilados,
-                        carga inalámbrica y mucho más.</p>
-                </div>
-            </div>
-            <div class="character-slider-container content--only-lateral">
-                <div
-                    class="character-slider swiper js-slider-character swiper-initialized swiper-horizontal swiper-pointer-events swiper-backface-hidden">
-                    <div class="character-slider__container swiper-wrapper" id="swiper-wrapper-08b4e591602b29b0"
-                        aria-live="polite" style="transform: translate3d(0px, 0px, 0px);">
-                        <div class="character-slider__item swiper-slide swiper-slide-active" role="group"
-                            aria-label="1 / 1" style="width: 1220px; margin-right: 40px;">
-                            <div class="character-slider__image">
-                                <picture class="">
-                                    <source srcset="">
-                                    <img class="" src="./index_files/seguridad.png" alt="">
-                                </picture>
-                            </div>
-                            <div class="character-slider__content character-slider__content_control">
-                                <p class="character-slider__title jc_cambio_color_blan4"> </p>
-                                <p class="character-slider__text jc_cambio_color_blan5"> </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div
-                        class="js-slider-character-pagination character-slider__pagination character-slider__pagination2 character-slider__pagination3 swiper-pagination-clickable swiper-pagination-bullets swiper-pagination-horizontal swiper-pagination-lock">
-                        <span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0"
-                            role="button" aria-label="Go to slide 1" aria-current="true"></span>
-                    </div>
-                    <div class="js-slider-character-navigation character-slider__navigation"></div>
-                    <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
-                </div>
-            </div>
+        <div class="stats__number">
+          <p class="stats__number-name">TORQUE</p>
+          <p class="js-value-counter stats__number-value">{stats.torque}</p>
         </div>
-        <div class="model__features model__features--bright jc_cambio_color_blan3">
-            <div class="content title-text jc_cambio_color_blan3">
-                <div
-                    class="title-text__content-wrapper title-text--with-title title-text--no-subtitle title-text--only-one-text">
-                    <h3 class="title-text__title observer-fade-in animation-activated">SISTEMAS DE SEGURIDAD ADAS</h3>
-                    <p class="title-text__text observer-fade-in animation-activated">Tecnología de asistencia avanzada
-                        que trabaja contigo para ofrecer una conducción más segura y confiable.</p>
-                </div>
-            </div>
-            <div class="feature-block content feature-block--dark jc_cambio_color_blan3">
-                <div
-                    class="feature-slider js-slider-triple swiper-initialized swiper-horizontal swiper-pointer-events swiper-watch-progress swiper-backface-hidden">
-                    <div class="feature-slider__container swiper-wrapper" id="swiper-wrapper-510e1b20e2f494bd4"
-                        aria-live="polite" style="transform: translate3d(-2520px, 0px, 0px); transition-duration: 0ms;">
-                        <div class="feature-slider__item swiper-slide" role="group" aria-label="1 / 6"
-                            style="width: 590px; margin-right: 40px;">
-                            <div class="feature-content">
-                                <picture class="">
-                                    <source srcset="">
-                                    <img class="feature-content__image" src="./index_files/ies.png" alt="">
-                                </picture>
-                                <h3 class="feature-content__title">IES - Dirección de Emergencia Inteligente</h3>
-                                <div class="feature-content__text">
-                                    Ayuda al conductor a maniobrar de forma segura en situaciones de emergencia,
-                                    aplicando asistencia en la dirección para evitar obstáculos o colisiones. </div>
-                            </div>
-                        </div>
-                        <div class="feature-slider__item swiper-slide" role="group" aria-label="2 / 6"
-                            style="width: 590px; margin-right: 40px;">
-                            <div class="feature-content">
-                                <picture class="">
-                                    <source srcset="">
-                                    <img class="feature-content__image" src="./index_files/acc.png" alt="">
-                                </picture>
-                                <h3 class="feature-content__title">ACC - Control Crucero Adaptativo</h3>
-                                <div class="feature-content__text">
-                                    Mantiene automáticamente una velocidad constante y regula la distancia con el
-                                    vehículo de adelante, frenando o acelerando según el tráfico. </div>
-                            </div>
-                        </div>
-                        <div class="feature-slider__item swiper-slide" role="group" aria-label="3 / 6"
-                            style="width: 590px; margin-right: 40px;">
-                            <div class="feature-content">
-                                <picture class="">
-                                    <source srcset="">
-                                    <img class="feature-content__image" src="./index_files/aeb.png" alt="">
-                                </picture>
-                                <h3 class="feature-content__title">AEB - Frenado Automático de Emergencia</h3>
-                                <div class="feature-content__text">
-                                    Detecta riesgos de colisión y aplica los frenos de manera automática si el conductor
-                                    no reacciona a tiempo. </div>
-                            </div>
-                        </div>
+      </div>
+    </div>
 
-                        <div class="feature-slider__item swiper-slide swiper-slide-visible swiper-slide-active"
-                            role="group" aria-label="4 / 6" style="width: 590px; margin-right: 40px;">
-                            <div class="feature-content">
-                                <picture class="">
-                                    <source srcset="">
-                                    <img class="feature-content__image" src="./index_files/lcc.png" alt="">
-                                </picture>
-                                <h3 class="feature-content__title">LCC - Control de Centrado en el Carril</h3>
-                                <div class="feature-content__text">
-                                    Mantiene al vehículo en el centro del carril, corrigiendo suavemente la dirección
-                                    cuando detecta desvíos. </div>
-                            </div>
-                        </div>
-                        <div class="feature-slider__item swiper-slide swiper-slide-visible swiper-slide-next"
-                            role="group" aria-label="5 / 6" style="width: 590px; margin-right: 40px;">
-                            <div class="feature-content">
-                                <picture class="">
-                                    <source srcset="">
-                                    <img class="feature-content__image" src="./index_files/tja.png" alt="">
-                                </picture>
-                                <h3 class="feature-content__title">TJA - Asistencia en Tráfico Pesado</h3>
-                                <div class="feature-content__text">
-                                    Combina ACC y LCC para manejar de forma semiautónoma en embotellamientos: mantiene
-                                    distancia, velocidad baja y el vehículo centrado en el carril. </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div
-                        class="js-slider-triple-pagination feature-slider__pagination swiper-pagination-clickable swiper-pagination-bullets swiper-pagination-horizontal">
-                        <span class="swiper-pagination-bullet" tabindex="0" role="button"
-                            aria-label="Go to slide 1"></span><span class="swiper-pagination-bullet" tabindex="0"
-                            role="button" aria-label="Go to slide 2"></span><span class="swiper-pagination-bullet"
-                            tabindex="0" role="button" aria-label="Go to slide 3"></span><span
-                            class="swiper-pagination-bullet" tabindex="0" role="button"
-                            aria-label="Go to slide 4"></span><span
-                            class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button"
-                            aria-label="Go to slide 5" aria-current="true"></span>
-                    </div>
-                    <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
-                </div>
-            </div>
+    <!-- Equipamiento Exterior -->
+    <div class="model__tech">
+      <div class="content title-text">
+        <div class="title-text__content-wrapper title-text--with-title title-text--no-subtitle title-text--only-one-text">
+          <h3 class="title-text__title observer-fade-in animation-activated">EQUIPAMIENTO EXTERIOR</h3>
+          <p class="title-text__text observer-fade-in animation-activated">
+            Parrilla frontal en "X", un diseño exterior de líneas definidas y luces Hyper Red en forma de 7: cada elemento exterior está diseñado para aportar visibilidad, seguridad y una identidad única en la carretera.
+          </p>
         </div>
-        <script>
-            $(document).ready(function () {
-
-                // TABS
-                $('.tab_button').on('click', function () {
-                    let id = $(this).attr('id');
-                    $('.tab_button').removeClass('tab_activo_jc');
-                    $(this).addClass('tab_activo_jc');
-
-                    $('.stats__numbers').hide();
-                    $('#content_tab_' + id).fadeIn();
-                });
-
-                // COLORS
-                $('.slider_button').on('click', function () {
-                    let id = $(this).attr('id');
-                    $('.slider_button').removeClass('slider_button_active');
-                    $(this).addClass('slider_button_active');
-
-                    $('.slide_big_new').hide();
-                    $('#slider-' + id).fadeIn();
-                });
-            });
-        </script>
-        <style type="text/css">
-            .js-slider-character-buttom-next {
-                width: 40px;
-                height: 40px;
-                position: absolute;
-                top: 50%;
-                z-index: 9999;
-                right: 0px;
-            }
-
-            .js-swiper-about-slider-button-prev {
-                width: 40px;
-                height: 40px;
-                position: absolute;
-                top: 50%;
-                z-index: 9999;
-                left: 0px;
-            }
-
-            .js-slider-character-buttom-next img {
-                width: 100%;
-            }
-
-            .js-swiper-about-slider-button-prev img {
-                width: 100%;
-            }
-
-            .tabs_news {
-                border: 1px solid #000;
-                width: 25px;
-                height: 25px;
-                border-radius: 1000px;
-                background-color: #d0cbc8;
-                margin-left: auto;
-                margin-right: auto;
-            }
-
-            .tabs_news.tabs_news_azul {
-                background-color: #102230;
-            }
-
-            .tabs_news.tabs_news_negro {
-                background-color: black;
-            }
-
-            .tabs_news.tabs_news_blanco {
-                background-color: white;
-            }
-
-            .tabs_news.tabs_news_gris_oscuro {
-                background-color: #2b333e;
-            }
-
-            .stats__number-value {
-                font-size: 56px !important;
-            }
-
-            @media (min-width: 1199px) {
-                .character-slider__content_control {
-                    top: auto;
-                    bottom: 20%;
-                }
-
-                .character-slider__item.swiper-slide-active .character-slider__title {
-                    font-size: 25px;
-                }
-            }
-
-            @media (max-width: 767px) {
-                .stats__number-value {
-                    font-size: 30px !important;
-                }
-            }
-
-            @media (max-width: 479px) {
-                .stats__number-value {
-                    font-size: 18px !important;
-                    text-decoration: none !important;
-                    color: #31373b !important;
-                }
-
-                .datos_banner {
-                    right: 16px;
-                    left: 16px;
-                    align-items: center;
-                    bottom: 69px;
-                }
-
-                .dos_columnas_banner {
-                    display: flex;
-                    align-items: start;
-                    margin-top: 5px;
-                }
-
-                .col_1_pr_mt {
-                    padding-right: 0px;
-                }
-
-                .txt_precio_desde {
-                    font-size: 12px;
-                    line-height: 20px;
-                }
-
-                .txt_combustible {
-                    font-size: 12px;
-                    line-height: 20px;
-                    letter-spacing: 1px;
-                    font-weight: 400;
-                    font-family: Avenir, sans-serif;
-                }
-
-                .precio_desde {
-                    font-size: 25px;
-                    line-height: 30px;
-                    font-weight: bold;
-                    font-family: Avenir, sans-serif;
-                }
-
-                .txt_motor {
-                    font-size: 25px;
-                    line-height: 30px;
-                    letter-spacing: 1px;
-                    font-family: Avenir, sans-serif;
-                }
-            }
-        </style>
-
-
-
-        <div class="model__tech jc_cambio_color_blan3" style="padding-bottom: 10px;">
-            <div class="content title-text jc_cambio_color_blan" style="padding: 16px 120px;">
-                <div class="title-text__content-wrapper title-text--no-title">
-                    <h3 class="title-text__title">Tu C7, a tu manera</h3>
-                    <h4 class="title-text__subtitle jc_more_padding" style="padding-top: 2px;">La personalización
-                        también forma parte de una
-                        experiencia pensada para ti. Cada color refleja tu estilo y te acompaña en cada trayecto con
-                        personalidad propia.</h4>
+      </div>
+      <div class="character-slider-container content--only-lateral">
+        <div class="character-slider swiper js-slider-character">
+          <div class="character-slider__container swiper-wrapper">
+            {exteriorSlides.map((slide, index) => (
+              <div class="character-slider__item swiper-slide" style="width: 1220px; margin-right: 40px;">
+                <div class="character-slider__image">
+                  <picture>
+                    <source media="(max-width: 767px)" srcset={slide.imageMobile}>
+                    <source srcset="">
+                    <img src={slide.image} alt={slide.title}>
+                  </picture>
                 </div>
-            </div>
-   
-            <style>
-                .model__tech .character-slider-container {
-                    margin-bottom: 4px;
-                }
-            </style>
-            <div id="slider-verde-oscuro" class="character-slider-container content--only-lateral slide_big_new"
-                style="padding: 0px; display: none;">
-                <div
-                    class="character-slider swiper js-slider-character swiper-initialized swiper-horizontal swiper-pointer-events swiper-backface-hidden">
-                    <div class="character-slider__container swiper-wrapper" id="swiper-wrapper-e76d1093d29e9ba74"
-                        aria-live="polite" style="transform: translate3d(0px, 0px, 0px);">
-                        <div class="character-slider__item swiper-slide swiper-slide-active" role="group"
-                            aria-label="1 / 1" style="width: 1460px; margin-right: 40px;">
-                            <div class="character-slider__image">
-                                <picture class="">
-                                    <source srcset="">
-                                    <img class="" src="./index_files/Verde.jpeg" alt="">
-                                </picture>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="js-slider-character-button-next btn_next swiper-button-disabled swiper-button-lock"
-                        tabindex="-1" role="button" aria-label="Next slide"
-                        aria-controls="swiper-wrapper-e76d1093d29e9ba74" aria-disabled="true">
-                        <img class="" src="./index_files/arrow-right-tabs_cars.svg">
-                    </div>
-                    <div class="js-slider-character-button-prev btn_prev swiper-button-disabled swiper-button-lock"
-                        tabindex="-1" role="button" aria-label="Previous slide"
-                        aria-controls="swiper-wrapper-e76d1093d29e9ba74" aria-disabled="true">
-                        <img class="" src="./index_files/arrow-left-tabs_cars.svg">
-                    </div>
-                    <div
-                        class="js-slider-character-pagination character-slider__pagination character-slider__pagination2 character-slider__pagination3 swiper-pagination-clickable swiper-pagination-bullets swiper-pagination-horizontal swiper-pagination-lock">
-                        <span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0"
-                            role="button" aria-label="Go to slide 1" aria-current="true"></span>
-                    </div>
-                    <div class="js-slider-character-navigation character-slider__navigation">
-                    </div>
-                    <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
+                <div class="character-slider__content">
+                  <p class={`character-slider__title ${slide.colorClass}`}>{slide.title}</p>
+                  <p class={`character-slider__text ${slide.colorClass}`}>{slide.text}</p>
                 </div>
-            </div>
-
-            <div id="slider-gris-acerado" class="character-slider-container content--only-lateral slide_big_new"
-                style="padding: 0px; display: none;">
-                <div
-                    class="character-slider swiper js-slider-character swiper-initialized swiper-horizontal swiper-pointer-events swiper-backface-hidden">
-                    <div class="character-slider__container swiper-wrapper" id="swiper-wrapper-5da3dc7afc868dcb"
-                        aria-live="polite" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px);">
-                        <div class="character-slider__item swiper-slide swiper-slide-active" role="group"
-                            aria-label="1 / 1" style="width: 1460px; margin-right: 40px;">
-                            <div class="character-slider__image">
-                                <picture class="">
-                                    <source srcset="">
-                                    <img class="" src="./index_files/Gris claro.Jpeg" alt="">
-                                </picture>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="js-slider-character-button-next btn_next swiper-button-lock swiper-button-disabled"
-                        tabindex="-1" role="button" aria-label="Next slide"
-                        aria-controls="swiper-wrapper-5da3dc7afc868dcb" aria-disabled="true">
-                        <img class="" src="./index_files/arrow-right-tabs_cars.svg">
-                    </div>
-                    <div class="js-slider-character-button-prev btn_prev swiper-button-lock swiper-button-disabled"
-                        tabindex="-1" role="button" aria-label="Previous slide"
-                        aria-controls="swiper-wrapper-5da3dc7afc868dcb" aria-disabled="true">
-                        <img class="" src="./index_files/arrow-left-tabs_cars.svg">
-                    </div>
-                    <div
-                        class="js-slider-character-pagination character-slider__pagination character-slider__pagination2 character-slider__pagination3 swiper-pagination-clickable swiper-pagination-bullets swiper-pagination-horizontal swiper-pagination-lock">
-                        <span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0"
-                            role="button" aria-label="Go to slide 1" aria-current="true"></span>
-                    </div>
-                    <div class="js-slider-character-navigation character-slider__navigation">
-                    </div>
-                    <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
-                </div>
-            </div>
-
-            <div id="slider-gris-oscuro" class="character-slider-container content--only-lateral slide_big_new"
-                style="padding: 0px;">
-                <div
-                    class="character-slider swiper js-slider-character swiper-initialized swiper-horizontal swiper-pointer-events swiper-backface-hidden">
-                    <div class="character-slider__container swiper-wrapper" id="swiper-wrapper-c775ff83f29b8ef6"
-                        aria-live="polite" style="transition-duration: 0ms; transform: translate3d(0px, 0px, 0px);">
-                        <div class="character-slider__item swiper-slide swiper-slide-active" role="group"
-                            aria-label="1 / 1" style="width: 1460px; margin-right: 40px;">
-                            <div class="character-slider__image">
-                                <picture class="">
-                                    <source srcset="">
-                                    <img class="" src="./index_files/Girs.jpeg" alt="">
-                                </picture>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="js-slider-character-button-next btn_next swiper-button-lock swiper-button-disabled"
-                        tabindex="-1" role="button" aria-label="Next slide"
-                        aria-controls="swiper-wrapper-c775ff83f29b8ef6" aria-disabled="true">
-                        <img class="" src="./index_files/arrow-right-tabs_cars.svg">
-                    </div>
-                    <div class="js-slider-character-button-prev btn_prev swiper-button-lock swiper-button-disabled"
-                        tabindex="-1" role="button" aria-label="Previous slide"
-                        aria-controls="swiper-wrapper-c775ff83f29b8ef6" aria-disabled="true">
-                        <img class="" src="./index_files/arrow-left-tabs_cars.svg">
-                    </div>
-                    <div
-                        class="js-slider-character-pagination character-slider__pagination character-slider__pagination2 character-slider__pagination3 swiper-pagination-clickable swiper-pagination-bullets swiper-pagination-horizontal swiper-pagination-lock">
-                        <span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0"
-                            role="button" aria-label="Go to slide 1" aria-current="true"></span>
-                    </div>
-                    <div class="js-slider-character-navigation character-slider__navigation">
-                    </div>
-                    <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
-                </div>
-            </div>
-
-            <div id="slider-blanco" class="character-slider-container content--only-lateral slide_big_new"
-                style="padding:0px; display: none;">
-                <div
-                    class="character-slider swiper js-slider-character swiper-initialized swiper-horizontal swiper-pointer-events">
-                    <div class="character-slider__container swiper-wrapper" id="swiper-wrapper-96125b642462d02e"
-                        aria-live="polite" style="transition-duration: 0ms;">
-                        <div class="character-slider__item swiper-slide ">
-                            <div class="character-slider__image">
-                                <picture class="">
-                                    <source srcset="">
-                                    <img class="" src="./index_files/Blanco.jpeg" alt="">
-                                </picture>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="js-slider-character-button-next btn_next" tabindex="0" role="button"
-                        aria-label="Next slide" aria-controls="swiper-wrapper-96125b642462d02e" aria-disabled="false">
-                        <img class="" src="./index_files/arrow-right-tabs_cars.svg">
-                    </div>
-                    <div class="js-slider-character-button-prev btn_prev" tabindex="0" role="button"
-                        aria-label="Previous slide" aria-controls="swiper-wrapper-96125b642462d02e"
-                        aria-disabled="false">
-                        <img class="" src="./index_files/arrow-left-tabs_cars.svg">
-                    </div>
-                    <div
-                        class="js-slider-character-pagination character-slider__pagination character-slider__pagination2 character-slider__pagination3 swiper-pagination-clickable swiper-pagination-bullets swiper-pagination-horizontal">
-                    </div>
-                    <div class="js-slider-character-navigation character-slider__navigation">
-                    </div>
-                    <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
-                </div>
-            </div>
-
-            <div id="slider-negro" class="character-slider-container content--only-lateral slide_big_new"
-                style="padding:0px; display: none;">
-                <div
-                    class="character-slider swiper js-slider-character swiper-initialized swiper-horizontal swiper-pointer-events">
-                    <div class="character-slider__container swiper-wrapper" id="swiper-wrapper-c3a10821579cd1902"
-                        aria-live="polite" style="transition-duration: 0ms;">
-                        <div class="character-slider__item swiper-slide ">
-                            <div class="character-slider__image">
-                                <picture class="">
-                                    <source srcset="">
-                                    <img class="" src="./index_files/Negro.jpeg" alt="">
-                                </picture>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="js-slider-character-button-next btn_next" tabindex="0" role="button"
-                        aria-label="Next slide" aria-controls="swiper-wrapper-c3a10821579cd1902" aria-disabled="false">
-                        <img class="" src="./index_files/arrow-right-tabs_cars.svg">
-                    </div>
-                    <div class="js-slider-character-button-prev btn_prev" tabindex="0" role="button"
-                        aria-label="Previous slide" aria-controls="swiper-wrapper-c3a10821579cd1902"
-                        aria-disabled="false">
-                        <img class="" src="./index_files/arrow-left-tabs_cars.svg">
-                    </div>
-                    <div
-                        class="js-slider-character-pagination character-slider__pagination character-slider__pagination2 character-slider__pagination3 swiper-pagination-clickable swiper-pagination-bullets swiper-pagination-horizontal">
-                    </div>
-                    <div class="js-slider-character-navigation character-slider__navigation">
-                    </div>
-                    <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
-                </div>
-            </div>
-            <div class="jc_tab_numbers jc_tab_numbers2">
-                <button type="button" id="verde-oscuro" class="jc_cta_tab newtabs slider_button">Verde Oscuro <div
-                        class="tabs_news" style="background-color: #1a5556;"></div>
-                </button>
-                <button type="button" id="gris-acerado" class="jc_cta_tab newtabs slider_button">Gris Acerado <div
-                        class="tabs_news" style="background-color: #6e797b;"></div>
-                </button>
-                <button type="button" id="gris-oscuro"
-                    class="jc_cta_tab newtabs slider_button slider_button_active">Gris Mate <div class="tabs_news"
-                        style="background-color: #2b333e;"></div>
-                </button>
-                <button type="button" id="blanco" class="jc_cta_tab newtabs slider_button">Blanco <div class="tabs_news"
-                        style="background-color: #ffffff;"></div>
-                </button>
-                <button type="button" id="negro" class="jc_cta_tab newtabs slider_button">Negro <div class="tabs_news"
-                        style="background-color: #000000;"></div>
-                </button>
-            </div>
+              </div>
+            ))}
+          </div>
+          <div class="js-slider-character-pagination character-slider__pagination"></div>
+          <div class="js-slider-character-navigation character-slider__navigation"></div>
         </div>
-        <div class="content_txt_ficha" style="padding: 15px 100px; text-align: center; display: none;">
-            <div class="title-text__content-wrapper title-text--no-title">
-                <h4 class="title-text__subtitle jc_more_padding"
-                    style="padding-top: 0px; color: #31373b; letter-spacing: normal; font-family: Raleway,sans-serif; font-size: 20px; font-weight: 300;">
-                </h4>
-            </div>
+      </div>
+    </div>
+
+    <!-- Equipamiento Interior -->
+    <div class="model__tech jc_cambio_color_blan3">
+      <div class="content title-text jc_cambio_color_blan3">
+        <div class="title-text__content-wrapper title-text--with-title title-text--no-subtitle title-text--only-one-text">
+          <h3 class="title-text__title jc_txt1_cambio observer-fade-in animation-activated">EQUIPAMIENTO INTERIOR</h3>
+          <p class="title-text__text jc_txt2_cambio observer-fade-in animation-activated">
+            Interior cómodo, silencioso y funcional, pensado para ofrecer bienestar en cada viaje.
+          </p>
         </div>
-        <div class="content title-text jc_cambio_color_blan" style="padding: 16px 120px;">
-            <div class="title-text__content-wrapper title-text--no-title">
-                <h4 class="title-text__subtitle jc_more_padding" style="padding-top: 0;">Estás más cerca de manejarlo​
-                </h4>
-                <a href="https://cotizar.omodajaecoo.com.pa/" class="btn1_jc">COTÍZALO HOY​</a>
-            </div>
+      </div>
+      <div class="character-slider-container content--only-lateral">
+        <div class="character-slider swiper js-slider-character">
+          <div class="character-slider__container swiper-wrapper">
+            {interiorSlides.map((slide, index) => (
+              <div class="character-slider__item swiper-slide" style="width: 1220px; margin-right: 40px;">
+                <div class="character-slider__image">
+                  <picture>
+                    <source media="(max-width: 767px)" srcset={slide.imageMobile}>
+                    <source srcset="">
+                    <img src={slide.image} alt={slide.title}>
+                  </picture>
+                </div>
+                <div class="character-slider__content">
+                  <p class="character-slider__title slide-color-245">{slide.title}</p>
+                  <p class="character-slider__text slide-color-245">{slide.text}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div class="js-slider-character-pagination character-slider__pagination"></div>
+          <div class="js-slider-character-navigation character-slider__navigation"></div>
         </div>
+      </div>
+    </div>
 
+    <!-- Sistemas de Seguridad ADAS -->
+    <div class="model__features model__features--bright jc_cambio_color_blan3">
+      <div class="content title-text jc_cambio_color_blan3">
+        <div class="title-text__content-wrapper title-text--with-title title-text--no-subtitle title-text--only-one-text">
+          <h3 class="title-text__title observer-fade-in animation-activated">SISTEMAS DE SEGURIDAD ADAS</h3>
+          <p class="title-text__text observer-fade-in animation-activated">
+            Tecnología de asistencia avanzada que trabaja contigo para ofrecer una conducción más segura y confiable.
+          </p>
+        </div>
+      </div>
+      <div class="feature-block content feature-block--dark jc_cambio_color_blan3">
+        <div class="feature-slider js-slider-triple">
+          <div class="feature-slider__container swiper-wrapper">
+            {adasFeatures.map((feature, index) => (
+              <div class="feature-slider__item swiper-slide" style="width: 590px; margin-right: 40px;">
+                <div class="feature-content">
+                  <picture>
+                    <source srcset="">
+                    <img class="feature-content__image" src={feature.image} alt={feature.title}>
+                  </picture>
+                  <h3 class="feature-content__title">{feature.title}</h3>
+                  <div class="feature-content__text">{feature.text}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div class="js-slider-triple-pagination feature-slider__pagination"></div>
+        </div>
+      </div>
+    </div>
 
+    <!-- Colores -->
+    <div class="model__tech jc_cambio_color_blan3" style="padding-bottom: 10px;">
+      <div class="content title-text jc_cambio_color_blan" style="padding: 16px 120px;">
+        <div class="title-text__content-wrapper title-text--no-title">
+          <h3 class="title-text__title">Tu C7, a tu manera</h3>
+          <h4 class="title-text__subtitle jc_more_padding" style="padding-top: 2px;">
+            La personalización también forma parte de una experiencia pensada para ti. Cada color refleja tu estilo y te acompaña en cada trayecto con personalidad propia.
+          </h4>
+        </div>
+      </div>
 
-    </main>
-    <footer-oj></footer-oj>
+      {colores.map((color, index) => (
+        <div 
+          id={`slider-${color.id}`} 
+          class="character-slider-container content--only-lateral slide_big_new"
+          style={`padding: 0px; display: ${color.activo ? 'block' : 'none'};`}
+        >
+          <div class="character-slider swiper js-slider-character">
+            <div class="character-slider__container swiper-wrapper">
+              <div class="character-slider__item swiper-slide" style="width: 1460px; margin-right: 40px;">
+                <div class="character-slider__image">
+                  <picture>
+                    <source srcset="">
+                    <img src={color.imagen} alt={`C7 Color ${color.nombre}`}>
+                  </picture>
+                </div>
+              </div>
+            </div>
+            <div class="js-slider-character-button-next btn_next">
+              <img src="/img/c7/arrow-right-tabs_cars.svg" alt="Siguiente">
+            </div>
+            <div class="js-slider-character-button-prev btn_prev">
+              <img src="/img/c7/arrow-left-tabs_cars.svg" alt="Anterior">
+            </div>
+            <div class="js-slider-character-pagination character-slider__pagination character-slider__pagination2 character-slider__pagination3"></div>
+            <div class="js-slider-character-navigation character-slider__navigation"></div>
+          </div>
+        </div>
+      ))}
 
-    <script is:inline src="/index_files/vendor.js"></script>
-    <script is:inline src="/index_files/main.js"></script>
+      <div class="jc_tab_numbers jc_tab_numbers2">
+        {colores.map((color, index) => (
+          <button 
+            type="button" 
+            id={color.id} 
+            class={`jc_cta_tab newtabs slider_button${color.activo ? ' slider_button_active' : ''}`}
+          >
+            {color.nombre} 
+            <div class="tabs_news" style={`background-color: ${color.color};`}></div>
+          </button>
+        ))}
+      </div>
+    </div>
 
+    <!-- CTA Final -->
+    <div class="content title-text jc_cambio_color_blan" style="padding: 16px 120px;">
+      <div class="title-text__content-wrapper title-text--no-title">
+        <h4 class="title-text__subtitle jc_more_padding" style="padding-top: 0;">
+          Estás más cerca de manejarlo
+        </h4>
+        <a href="https://cotizar.omodajaecoo.com.pa/" class="btn1_jc">COTÍZALO HOY</a>
+      </div>
+    </div>
 
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+      <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KZ7C5J9K" 
+        height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+  </main>
 
-    <script is:inline src="/index_files/teads-fellow.js"></script>
+</Layout>
 
+<script is:inline>
+  // Script que maneja las tabs de colores
+  document.addEventListener('DOMContentLoaded', function() {
+    // TABS de colores
+    const sliderButtons = document.querySelectorAll('.slider_button');
+    sliderButtons.forEach(button => {
+      button.addEventListener('click', function() {
+        const id = this.getAttribute('id');
+        
+        // Remover clase activa de todos los botones
+        sliderButtons.forEach(btn => btn.classList.remove('slider_button_active'));
+        // Agregar clase activa al botón clickeado
+        this.classList.add('slider_button_active');
+        
+        // Ocultar todos los sliders
+        document.querySelectorAll('.slide_big_new').forEach(slide => {
+          slide.style.display = 'none';
+        });
+        
+        // Mostrar el slider correspondiente
+        const sliderToShow = document.getElementById('slider-' + id);
+        if (sliderToShow) {
+          sliderToShow.style.display = 'block';
+        }
+      });
+    });
+  });
+</script>
 
+<style>
+  /* Estilos específicos del C7 que se mantienen */
+  .stats__title {
+    font-size: 58px;
+  }
 
-</body>
+  .model__tech .title-text {
+    background-color: #f4f5f5;
+  }
 
-</html>
+  .character-slider__content {
+    top: 160px;
+  }
+
+  .character-slider__pagination {
+    bottom: 60px;
+  }
+
+  .jc_cambio_color_blan,
+  .jc_cambio_color_blan3 {
+    background-color: #fff !important;
+  }
+
+  .jc_more_padding {
+    padding-top: 40px;
+  }
+
+  .jc_txt1_cambio {
+    color: #30363a !important;
+    font-weight: 400 !important;
+  }
+
+  .jc_txt2_cambio {
+    padding-top: 20px !important;
+    color: #33393d !important;
+    font-weight: 500 !important;
+  }
+
+  .jc_cambio_color_blan4,
+  .jc_cambio_color_blan5,
+  .jc_txt_blan6 {
+    color: #fff !important;
+  }
+
+  .character-slider__pagination2 {
+    color: #fff !important;
+    height: 2px;
+  }
+
+  .jc_cambio_col_dark {
+    background-color: #31363a !important;
+  }
+
+  .jc_tab_numbers {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 0px;
+    flex-wrap: wrap;
+  }
+
+  .jc_cta_tab {
+    font-size: 18px;
+    line-height: 50px;
+    color: #6f8590;
+    font-weight: 500;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 10px;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+    transition: .2s;
+  }
+
+  .tab_activo_jc {
+    text-transform: uppercase;
+    color: #30363a;
+    text-decoration: underline;
+  }
+
+  .slider_button_active {
+    color: #30363a;
+    text-decoration: underline;
+  }
+
+  .full-bg__img img {
+    object-fit: contain !important;
+  }
+
+  .btn1_jc {
+    display: inline-block;
+    font-size: 14px;
+    line-height: 27px;
+    color: #30363a;
+    font-weight: 500;
+    font-family: "Avenir";
+    text-align: center;
+    border: 1px solid #30363a;
+    padding: 15px 30px 15px 30px;
+    margin-top: 20px;
+    text-decoration: none;
+  }
+
+  .container {
+    max-width: 1140px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  .datos_banner {
+    right: auto;
+    left: 120px;
+    align-items: start;
+    bottom: 69px;
+  }
+
+  .logo_banner {
+    width: 150px;
+  }
+
+  .dos_columnas_banner {
+    display: flex;
+    align-items: center;
+  }
+
+  .txt_combustible {
+    font-size: 22px;
+    line-height: 25px;
+    letter-spacing: 1px;
+    font-weight: bold;
+    font-family: Avenir, sans-serif;
+  }
+
+  .btn_next,
+  .btn_prev {
+    position: absolute;
+    top: 50%;
+    z-index: 1;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    cursor: pointer;
+  }
+
+  .btn_next {
+    right: 10px;
+  }
+
+  .btn_prev {
+    left: 10px;
+  }
+
+  .tabs_news {
+    border: 1px solid #000;
+    width: 25px;
+    height: 25px;
+    border-radius: 1000px;
+    background-color: #d0cbc8;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .stats__number-value {
+    font-size: 56px !important;
+  }
+
+  .model__tech,
+  .model__tech .title-text,
+  .model__features,
+  .model__features--white .title-text,
+  .model__features .feature-block,
+  .brand-page .content,
+  .brand-page {
+    background-color: #f4f5f5;
+  }
+
+  @media (max-width: 1199px) {
+    .character-slider__content {
+      top: 0px !important;
+    }
+    .character-slider__pagination {
+      position: initial !important;
+      bottom: 0px !important;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .container {
+      padding-left: 0;
+      padding-right: 0;
+    }
+    .stats__number-value {
+      font-size: 30px !important;
+    }
+  }
+
+  @media (max-width: 579px) {
+    .jc_cta_tab {
+      padding: 0px 8px 0px 8px;
+      font-size: 14px;
+    }
+  }
+
+  @media (max-width: 479px) {
+    .stats__number-value {
+      font-size: 18px !important;
+      text-decoration: none !important;
+      color: #31373b !important;
+    }
+    .datos_banner {
+      right: 16px;
+      left: 16px;
+      align-items: center;
+      bottom: 69px;
+    }
+    .dos_columnas_banner {
+      display: flex;
+      align-items: start;
+      margin-top: 5px;
+    }
+    .txt_combustible {
+      font-size: 12px;
+      line-height: 20px;
+      font-weight: 400;
+    }
+  }
+</style>
